@@ -1,14 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package adventureGame.model;
 
-/**
- *
- * @author Fen
- */
+
 public class Player {
+    private String name;
+    private int health;
+    private int currentRoom;
+
+    public Player(String name) {
+        this.name = name;
+        this.health = 100;
+        this.currentRoom = 0;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public void setCurrentRoom(int currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+
+    public String getName() {
+        return name;
+    }
     
 }

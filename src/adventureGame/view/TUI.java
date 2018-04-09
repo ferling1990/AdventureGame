@@ -5,10 +5,19 @@
  */
 package adventureGame.view;
 
-/**
- *
- * @author Fen
- */
-public class TUI {
+import java.util.Scanner;
+
+public class TUI implements UI{
+    Scanner sc;
+    
+    public TUI() {
+        sc = new Scanner(System.in);
+    }
+
+    @Override
+    public String askDirection() {
+        System.out.println("Which direction do you wish to go? (type n/e/s/w)");
+        return sc.nextLine();
+    }
     
 }

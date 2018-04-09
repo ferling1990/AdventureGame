@@ -1,14 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package adventureGame.model;
 
-/**
- *
- * @author Fen
- */
+import java.util.ArrayList;
+
 public class Dungeon {
+    public ArrayList<Room> rooms;
+
+    public Dungeon() {
+        rooms = new ArrayList();
+    }
+    
+    public void addRoom(Room room) {
+        rooms.add(room);
+    }
+    
     
 }
