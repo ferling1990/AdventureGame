@@ -24,5 +24,15 @@ public class TUI implements UI{
     public void winningMessage() {
         System.out.println("You have won the game");
     }
+
+    @Override
+    public void deathMessage() {
+        System.out.println("YOU ARE DEAD!");
+    }
+
+    @Override
+    public void startMessage() {
+        System.out.println("Goal is to reach the end of the maze. Read descriptions and type commands like n to move north or loot");
+    }
     
 }
