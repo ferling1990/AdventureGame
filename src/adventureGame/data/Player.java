@@ -1,4 +1,4 @@
-package adventureGame.model;
+package adventureGame.data;
 
 
 public class Player {

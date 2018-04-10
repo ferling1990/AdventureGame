@@ -17,7 +17,12 @@ public class TUI implements UI{
     @Override
     public String askDirection() {
         System.out.println("Which direction do you wish to go? (type n/e/s/w)");
-        return sc.nextLine();
+        return sc.nextLine().toLowerCase();
+    }
+
+    @Override
+    public void winningMessage() {
+        System.out.println("You have won the game");
     }
     
 }

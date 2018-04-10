@@ -5,7 +5,7 @@ import adventureGame.logic.Controller;
 public class AdventureGame1 {
 
     public static void main(String[] args) {
-        new Controller().startGame();
+        new Controller().game();
     }
     
 }

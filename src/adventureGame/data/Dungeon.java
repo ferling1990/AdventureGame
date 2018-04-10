@@ -1,4 +1,4 @@
-package adventureGame.model;
+package adventureGame.data;
 
 import java.util.ArrayList;
 
