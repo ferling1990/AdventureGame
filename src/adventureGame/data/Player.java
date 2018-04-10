@@ -6,10 +6,10 @@ public class Player {
     private int health;
     private int currentRoom;
 
-    public Player(String name) {
+    public Player(String name, int startRoom) {
         this.name = name;
         this.health = 100;
-        this.currentRoom = 0;
+        this.currentRoom = startRoom;
     }
 
     public int getHealth() {

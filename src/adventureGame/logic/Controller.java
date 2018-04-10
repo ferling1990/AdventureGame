@@ -4,6 +4,8 @@ import adventureGame.data.Dungeon;
 import adventureGame.data.Room;
 import adventureGame.data.Player;
 import adventureGame.view.TUI;
+import java.util.Random;
+
 
 public class Controller {
 
@@ -11,15 +13,31 @@ public class Controller {
     private Dungeon dungeon;
     private World world;
     private TUI ui;
+    private Random rand;
+    
 
     public Controller() {
-        player = new Player("Player1");
         ui = new TUI();
         world = new World();
+        rand = new Random();
+    }
+    
+    public int generateStartRoom(){
+        int startRoomNumber = rand.nextInt(4);
+        switch(startRoomNumber){
+            case 0: startRoomNumber = 0; break;
+            case 1: startRoomNumber = 10; break;
+            case 2: startRoomNumber = 12; break;
+            case 3: startRoomNumber = 15; break;
+            default: startRoomNumber = 0;
+        }
+        return startRoomNumber;
     }
 
     public void game() {
+        player = new Player("Player1", generateStartRoom());
         world.createWorld();
+        System.out.println(player.getCurrentRoom());
         dungeon = world.getDungeon();
         ui.startMessage();
         do {
