@@ -6,5 +6,8 @@ public interface UI {
     public void winningMessage();
     public void deathMessage();
     public void startMessage();
+    public void invalidCommand();
+    public void noDoorMessage();
+    public void listOfCommands();
     
 }

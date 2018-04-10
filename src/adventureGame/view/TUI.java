@@ -16,7 +16,7 @@ public class TUI implements UI{
 
     @Override
     public String askDirection() {
-        System.out.println("Which direction do you wish to go? (type n/e/s/w)");
+        System.out.println("What is your next action?");
         return sc.nextLine().toLowerCase();
     }
 
@@ -32,7 +32,27 @@ public class TUI implements UI{
 
     @Override
     public void startMessage() {
-        System.out.println("Goal is to reach the end of the maze. Read descriptions and type commands like n to move north or loot");
+        System.out.println("Goal is to reach the end of the maze.");
+        System.out.println("Type 'help' to get help");
+    }
+
+    @Override
+    public void invalidCommand() {
+        System.out.println("Invalid command, try something else.");
+    }
+
+    @Override
+    public void noDoorMessage() {
+        System.out.println("You tried to walk through a wall. Ouch!");
+    }
+    
+    @Override
+    public void listOfCommands() {
+        System.out.println("Type 'n' to go north");
+        System.out.println("Type 'e' to go east");
+        System.out.println("Type 's' to go south");
+        System.out.println("Type 'w' to go west");
+        // add loot, combat, etcetc
     }
     
 }
