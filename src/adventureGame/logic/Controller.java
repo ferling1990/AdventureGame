@@ -75,6 +75,9 @@ public class Controller {
                 case "help":
                     ui.listOfCommands();
                     break;
+                case "quit":
+                    System.out.println("GG");
+                    System.exit(0);
                 default:
                     ui.invalidCommand();
             }
