@@ -1,5 +1,8 @@
 package adventuregame1;
 
+//Group 20
+//Lau, Mark, Jonatan og Mads
+
 import adventureGame.logic.Controller;
 
 public class AdventureGame1 {

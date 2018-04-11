@@ -1,104 +1,52 @@
+//Main controller of the game, has the while loop that keeps the game running
+//and instantiates most of the classes.
+
 package adventureGame.logic;
+
+//Group 20
+//Lau, Mark, Jonatan og Mads
 
 import adventureGame.data.Dungeon;
 import adventureGame.data.Room;
 import adventureGame.data.Player;
 import adventureGame.view.TUI;
-import java.util.Random;
-
 
 public class Controller {
-
+    
     private Player player;
     private Dungeon dungeon;
     private World world;
     private TUI ui;
-    private Random rand;
+    private int turn;
+    private Actions act;
     
-
     public Controller() {
         ui = new TUI();
         world = new World();
-        rand = new Random();
+        act = new Actions();
+        turn = 1;
     }
     
-    public int generateStartRoom(){
-        int startRoomNumber = rand.nextInt(4);
-        switch(startRoomNumber){
-            case 0: startRoomNumber = 0; break;
-            case 1: startRoomNumber = 10; break;
-            case 2: startRoomNumber = 12; break;
-            case 3: startRoomNumber = 15; break;
-            default: startRoomNumber = 0;
-        }
-        return startRoomNumber;
-    }
-
     public void game() {
-        player = new Player("Player1", generateStartRoom());
+        player = new Player("Player1", world.generateStartRoom()); //generateStartRoom randomizes between 4 possible startrooms
         world.createWorld();
-        System.out.println(player.getCurrentRoom());
+        //System.out.println(player.getCurrentRoom()); //test message to see the start room number
         dungeon = world.getDungeon();
         ui.startMessage();
+        //main loop that kees the game running till the end of maze is reached or player types quit.
         do {
             System.out.println(dungeon.rooms.get(player.getCurrentRoom()));
-            String direction = ui.askDirection();
-            switch (direction) {
-                case "n":
-                    if (checkDirection(1)) {
-                        player.setCurrentRoom(dungeon.rooms.get(player.getCurrentRoom()).getNorth()); //set current room to the room north
-                    } else {
-                        ui.noDoorMessage();
-                    }
-                    break;
-                case "e":
-                    if (checkDirection(2)) {
-                        player.setCurrentRoom(dungeon.rooms.get(player.getCurrentRoom()).getEast());
-                    } else {
-                        ui.noDoorMessage();
-                    }
-                    break;
-                case "s":
-                    if (checkDirection(3)) {
-                        player.setCurrentRoom(dungeon.rooms.get(player.getCurrentRoom()).getSouth());
-                    } else {
-                        ui.noDoorMessage();
-                    }
-                    break;
-                case "w":
-                    if (checkDirection(4)) {
-                        player.setCurrentRoom(dungeon.rooms.get(player.getCurrentRoom()).getWest());
-                    } else {
-                        ui.noDoorMessage();
-                    }
-                    break;
-                case "help":
-                    ui.listOfCommands();
-                    break;
-                case "quit":
-                    System.out.println("GG");
-                    System.exit(0);
-                default:
-                    ui.invalidCommand();
+            // this if-statement adds the 3 messages to the startroom. We have 
+            // decided to it this way, as previously mentioned our startroom is "random".
+            if (turn == 1) {
+                dungeon.rooms.get(player.getCurrentRoom()).addStringToDescription("\nUpon entering the room, you recognize it,");
+                dungeon.rooms.get(player.getCurrentRoom()).addStringToDescription("you've been here before, you recognize the elevator,");
+                dungeon.rooms.get(player.getCurrentRoom()).addStringToDescription("you are back where you started!");
             }
-
-        } while (player.getCurrentRoom() != 99);
+            act.playerAction(player, dungeon, ui); //This is a switch that asks for player action with fitting cases.
+            turn++; // counts the number of turns used.
+        } while (player.getCurrentRoom() != 99); //game ends when current room == 99 (the end room).
         ui.winningMessage();
     }
-
-    public boolean checkDirection(int direction) {
-        switch (direction) {
-            case 1:
-                return dungeon.rooms.get(player.getCurrentRoom()).getNorth() >= 0;
-            case 2:
-                return dungeon.rooms.get(player.getCurrentRoom()).getEast() >= 0;
-            case 3:
-                return dungeon.rooms.get(player.getCurrentRoom()).getSouth() >= 0;
-            case 4:
-                return dungeon.rooms.get(player.getCurrentRoom()).getWest() >= 0;
-            default:
-                return false;
-        }
-
-    }
+    
 }

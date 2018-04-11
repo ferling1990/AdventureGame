@@ -1,5 +1,9 @@
+//Player class, most important info in player is the currentRoom.
+
 package adventureGame.data;
 
+//Group 20
+//Lau, Mark, Jonatan og Mads
 
 public class Player {
     private String name;
