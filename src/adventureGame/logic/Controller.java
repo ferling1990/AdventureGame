@@ -52,64 +52,75 @@ public class Controller {
 //    Method that asks the player for an action
 //    and through the switch tries to do something
     public void playerAction() {
-        String direction = ui.askDirection();
-        switch (direction) {
-            case "n":
-                goNorth();
-                break;
-            case "e":
-                goEast();
-                break;
-            case "s":
-                goSouth();
-                break;
-            case "w":
-                goWest();
-                break;
-            case "help":
-                ui.listOfCommands();
-                break;
-            case "quit":
-                System.out.println("GG");
-                System.exit(0);
-            default:
-                ui.invalidCommand();
+        boolean actCompleted = false;
+        while(!actCompleted)  {
+            String direction = ui.askDirection();
+            switch (direction) {
+                case "n":
+                    actCompleted = goNorth();
+                    break;
+                case "e":
+                    actCompleted = goEast();
+                    break;
+                case "s":
+                    actCompleted = goSouth();
+                    break;
+                case "w":
+                    actCompleted = goWest();
+                    break;
+                case "help":
+                    ui.listOfCommands();
+                    break;
+                case "quit":
+                    System.out.println("GG");
+                    System.exit(0);
+                default:
+                    ui.invalidCommand();
+            }
         }
     }
-    
+
     //Checks if there is a door north with checkDirection(), moves to room north if there is.
-    public void goNorth() {
+    public boolean goNorth() {
         if (checkDirection(1)) {
             player.setCurrentRoom(dungeon.rooms.get(player.getCurrentRoom()).getNorth()); //set current room to the room north
+            return true;
         } else {
             ui.noDoorMessage();
+            return false;
         }
     }
 
     //Checks if there is a door east with checkDirection(), moves to room east if there is.
-    public void goEast() {
+    public boolean goEast() {
         if (checkDirection(2)) {
-            player.setCurrentRoom(dungeon.rooms.get(player.getCurrentRoom()).getEast()); //set current room to the room north
+            player.setCurrentRoom(dungeon.rooms.get(player.getCurrentRoom()).getEast()); //set current room to the room east
+            return true;
         } else {
             ui.noDoorMessage();
+            return false;
         }
     }
 
     //Checks if there is a door south with checkDirection(), moves to room south if there is.
-    public void goSouth() {
+    public boolean goSouth() {
         if (checkDirection(3)) {
-            player.setCurrentRoom(dungeon.rooms.get(player.getCurrentRoom()).getSouth()); //set current room to the room north
+            player.setCurrentRoom(dungeon.rooms.get(player.getCurrentRoom()).getSouth()); //set current room to the room south
+            return true;
         } else {
             ui.noDoorMessage();
+            return false;
         }
     }
 
     //Checks if there is a door west with checkDirection(), moves to room west if there is.
-    public void goWest() {
+    public boolean goWest() {
         if (checkDirection(4)) {
-            player.setCurrentRoom(dungeon.rooms.get(player.getCurrentRoom()).getWest()); //set current room to the room north
+            player.setCurrentRoom(dungeon.rooms.get(player.getCurrentRoom()).getWest()); //set current room to the room west
+            return true;
         } else {
             ui.noDoorMessage();
+            return false;
         }
     }
 

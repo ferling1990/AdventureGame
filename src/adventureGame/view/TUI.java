@@ -8,7 +8,7 @@ package adventureGame.view;
 import java.util.Scanner;
 
 public class TUI implements UI{
-    Scanner sc;
+    private Scanner sc;
     
     public TUI() {
         sc = new Scanner(System.in);
