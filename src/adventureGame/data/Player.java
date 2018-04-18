@@ -11,10 +11,10 @@ import java.util.ArrayList;
 public class Player {
     private String name;
     private int health;
-    private int currentRoom;
+    private Room currentRoom;
     public ArrayList<Item> inventory;
 
-    public Player(String name, int startRoom) {
+    public Player(String name, Room startRoom) {
         inventory = new ArrayList();
         this.name = name;
         this.health = 50;
@@ -39,11 +39,11 @@ public class Player {
         this.health = health;
     }
 
-    public int getCurrentRoom() {
+    public Room getCurrentRoom() {
         return currentRoom;
     }
 
-    public void setCurrentRoom(int currentRoom) {
+    public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
     }
 

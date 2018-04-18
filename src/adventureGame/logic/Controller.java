@@ -26,28 +26,35 @@ public class Controller {
     }
 
     public void game() {
-        player = new Player("Player1", world.generateStartRoom()); //generateStartRoom randomizes between 4 possible startrooms
-        world.createWorld();
-        //System.out.println(player.getCurrentRoom()); //test message to see the start room number
-        dungeon = world.getDungeon();
+        createWorld();
+        createPlayer();
         //act = new Actions(dungeon, ui);
         ui.startMessage();
         //main loop that kees the game running till the end of maze is reached or player types quit.
         do {
             System.out.println("hp: " +player.getHealth());
-            System.out.println(dungeon.rooms.get(player.getCurrentRoom()));
+            System.out.println(player.getCurrentRoom());
 
             // this if-statement adds the 3 messages to the startroom. We have 
             // decided to it this way, as previously mentioned our startroom is "random".
             if (turn == 1) {
-                dungeon.rooms.get(player.getCurrentRoom()).addStringToDescription("\nUpon entering the room, you recognize it,");
-                dungeon.rooms.get(player.getCurrentRoom()).addStringToDescription("you've been here before, you recognize the elevator,");
-                dungeon.rooms.get(player.getCurrentRoom()).addStringToDescription("you are back where you started!");
+                player.getCurrentRoom().addStringToDescription("\nUpon entering the room, you recognize it,");
+                player.getCurrentRoom().addStringToDescription("you've been here before, you recognize the elevator,");
+                player.getCurrentRoom().addStringToDescription("you are back where you started!");
             }
             playerAction(); //This is a switch that asks for player action with fitting cases.
             turn++; // counts the number of turns used.
-        } while (player.getCurrentRoom() != 99); //game ends when current room == 99 (the end room).
+        } while (!player.getCurrentRoom().getIsFinalRoom()); //game ends when current room == 99 (the end room).
         ui.winningMessage();
+    }
+    
+    void createWorld() {
+        world.createWorld();
+        dungeon = world.getDungeon();
+    }
+    
+    void createPlayer() {
+        player = new Player("Player1", dungeon.rooms.get(world.generateStartRoom())); //generateStartRoom randomizes between 4 possible startrooms
     }
 
 //    Method that asks the player for an action
@@ -70,8 +77,8 @@ public class Controller {
                     actCompleted = goWest();
                     break;
                 case "loot":
-                    player.inventory.add(dungeon.rooms.get(player.getCurrentRoom()).getItem());
-                    dungeon.rooms.get(player.getCurrentRoom()).removeItem();
+                    player.inventory.add(player.getCurrentRoom().getItem());
+                    player.getCurrentRoom().removeItem();
                     break;
                 case "pot":
                     player.usePot();
@@ -91,7 +98,7 @@ public class Controller {
     //Checks if there is a door north with checkDirection(), moves to room north if there is.
     public boolean goNorth() {
         if (checkDirection(1)) {
-            player.setCurrentRoom(dungeon.rooms.get(player.getCurrentRoom()).getNorth()); //set current room to the room north
+            player.setCurrentRoom(player.getCurrentRoom().getNorth()); //set current room to the room north
             return true;
         } else {
             ui.noDoorMessage();
@@ -102,7 +109,7 @@ public class Controller {
     //Checks if there is a door east with checkDirection(), moves to room east if there is.
     public boolean goEast() {
         if (checkDirection(2)) {
-            player.setCurrentRoom(dungeon.rooms.get(player.getCurrentRoom()).getEast()); //set current room to the room east
+            player.setCurrentRoom(player.getCurrentRoom().getEast()); //set current room to the room east
             return true;
         } else {
             ui.noDoorMessage();
@@ -113,7 +120,7 @@ public class Controller {
     //Checks if there is a door south with checkDirection(), moves to room south if there is.
     public boolean goSouth() {
         if (checkDirection(3)) {
-            player.setCurrentRoom(dungeon.rooms.get(player.getCurrentRoom()).getSouth()); //set current room to the room south
+            player.setCurrentRoom(player.getCurrentRoom().getSouth()); //set current room to the room south
             return true;
         } else {
             ui.noDoorMessage();
@@ -124,7 +131,7 @@ public class Controller {
     //Checks if there is a door west with checkDirection(), moves to room west if there is.
     public boolean goWest() {
         if (checkDirection(4)) {
-            player.setCurrentRoom(dungeon.rooms.get(player.getCurrentRoom()).getWest()); //set current room to the room west
+            player.setCurrentRoom(player.getCurrentRoom().getWest()); //set current room to the room west
             return true;
         } else {
             ui.noDoorMessage();
@@ -138,13 +145,13 @@ public class Controller {
     private boolean checkDirection(int direction) {
         switch (direction) {
             case 1:
-                return dungeon.rooms.get(player.getCurrentRoom()).getNorth() >= 0;
+                return player.getCurrentRoom().getNorth() != null;
             case 2:
-                return dungeon.rooms.get(player.getCurrentRoom()).getEast() >= 0;
+                return player.getCurrentRoom().getEast() != null;
             case 3:
-                return dungeon.rooms.get(player.getCurrentRoom()).getSouth() >= 0;
+                return player.getCurrentRoom().getSouth() != null;
             case 4:
-                return dungeon.rooms.get(player.getCurrentRoom()).getWest() >= 0;
+                return player.getCurrentRoom().getWest() != null;
             default:
                 return false;
         }

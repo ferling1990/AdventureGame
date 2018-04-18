@@ -48,48 +48,111 @@ public class World {
     // Room(north, east, south, west, String description)
     public void createWorld() {
         //main path
-        String room0 = "This room is very cold, and has a very humid feel,\nthe room has a torch on one side of the walls. HP pot in corner";
-        dungeon.addRoom(new Room(13, 1, -1, -1, room0, new HealthPot())); //Room 0, start
-        String room1 = "The room's walls are very mossy, there's crates and\nother furniture, it looks like an old supply depot.";
-        dungeon.addRoom(new Room(10, 2, -1, 0, room1)); //Room 1
-        String room2 = "You now find yourself in a new room. This room is chilly,\nbut it feels a little warmer, than the last.";
-        dungeon.addRoom(new Room(-1, 14, 3, 1, room2)); //Room 2
-        String room3 = "This room's floor is wet, and slippery,\nthere's a Skull hanging above the door leading east.";
-        dungeon.addRoom(new Room(2, 4, -1, -1, room3)); //Room 3
-        String room4 = "This rooms floor is still wet, but this room is a corridor\nwith little to no light, the corridor is long and thin.";
-        dungeon.addRoom(new Room(-1, 5, -1, 3, room4)); //Room 4
-        String room5 = "Entering the room you find some crates.";
-        dungeon.addRoom(new Room(6, -1, -1, 4, room5)); //Room 5
-        String room6 = "This room is a corridor with water covering your feet, its cold.";
-        dungeon.addRoom(new Room(7, -1, 5, -1, room6)); //Room 6
-        String room7 = "This room is a corridor, the southern part\nis covered in water, while the northern part is dry.";
-        dungeon.addRoom(new Room(8, -1, 6, -1, room7)); //Room 7
-        String room8 = "This room has a torch on one of the walls,\nthis room looks like an old entrance, there's dynamite boxes,\nbut they are all covered in water, no use.";
-        dungeon.addRoom(new Room(-1, -1, 7, 9, room8)); //Room 8
-        String room9 = "This room has a very cold floor, there's little to no light,\nbut a skull is hanging above the west door.";
-        dungeon.addRoom(new Room(99, 8, -1, 16, room9)); //Room 9, end if 99
+        String room0Description = "This room is very cold, and has a very humid feel,\nthe room has a torch on one side of the walls. HP pot in corner";
+        Room room0 = new Room(room0Description, new HealthPot()); //Room 0, start
+        
+        String room1Description = "The room's walls are very mossy, there's crates and\nother furniture, it looks like an old supply depot.";
+        Room room1 = new Room(room1Description); //Room 1
+        
+        String room2Description = "You now find yourself in a new room. This room is chilly,\nbut it feels a little warmer, than the last.";
+        Room room2 = new Room(room2Description); //Room 2
+
+        String room3Description = "This room's floor is wet, and slippery,\nthere's a Skull hanging above the door leading east.";
+        Room room3 = new Room(room3Description); //Room 3
+        
+        String room4Description = "This rooms floor is still wet, but this room is a corridor\nwith little to no light, the corridor is long and thin.";
+        Room room4 = new Room(room4Description); //Room 4
+        
+        String room5Description= "Entering the room you find some crates.";
+        Room room5 = new Room(room5Description); //Room 5
+        
+        String room6Description = "This room is a corridor with water covering your feet, its cold.";
+        Room room6 = new Room(room6Description); //Room 6
+        
+        String room7Description = "This room is a corridor, the southern part\nis covered in water, while the northern part is dry.";
+        Room room7 = new Room(room7Description); //Room 7
+        
+        String room8Description = "This room has a torch on one of the walls,\nthis room looks like an old entrance, there's dynamite boxes,\nbut they are all covered in water, no use.";
+        Room room8 = new Room(room8Description); //Room 8
+        
+        String room9Description = "This room has a very cold floor, there's little to no light,\nbut a skull is hanging above the west door.";
+        Room room9 = new Room(room9Description); //Room 9
+        
+        String roomEndDescription = "You won.";
+        Room wonTheGame = new Room(roomEndDescription);
+        wonTheGame.setIsFinalRoom(true);
 
         //loop, starts from room 0 and 1
-        String room10 = "This room is very humid and cold. The east door\nis locked with a mysterious looking skull hanging above\nthe door frame, there's wind coming from beneath the door.";
-        dungeon.addRoom(new Room(11, -1, 1, -1, room10)); //Room 10
-        String room11 = "This room is nothing special, there is old clothe laying around.";
-        dungeon.addRoom(new Room(-1, -1, 10, 12, room11)); //Room 11
-        String room12 = "This room has a very humid feeling,\nand a torch is lit on one of the walls.";
-        dungeon.addRoom(new Room(-1, 11, 13, -1, room12)); //Room 12
-        String room13 = "This room is a long corridor, there\nis light at the end of the tunnel!";
-        dungeon.addRoom(new Room(12, -1, 0, -1, room13)); //Room 13
+        String room10Description = "This room is very humid and cold. The east door\nis locked with a mysterious looking skull hanging above\nthe door frame, there's wind coming from beneath the door.";
+        Room room10 = new Room(room10Description); //Room 10
+        
+        String room11Description = "This room is nothing special, there is old clothe laying around.";
+        Room room11 = new Room(room11Description);
+        
+        String room12Description = "This room has a very humid feeling,\nand a torch is lit on one of the walls.";
+        Room room12 = new Room(room12Description); //Room 12
+        
+        String room13Description = "This room is a long corridor, there\nis light at the end of the tunnel!";
+        Room room13 = new Room(room13Description); //Room 13
 
         //dead-end, starts from room 2
-        String room14 = "After walking into the room, you are\nfaced with a riddle, \"Skull oh skull\",\nwhat does it mean?";
-        dungeon.addRoom(new Room(15, -1, -1, 2, room14)); //Room 14
-        String room15 = "This room is very dark, and there is\nlittle to no light. In the corners\nof the room is various disgusting looking tools,\nand an iron maiden, there are old bloodstains in\nthe middle of the room, a torture chamber perhaps?";
-        dungeon.addRoom(new Room(-1, -1, 14, -1, room15)); //Room 15
+        String room14Description = "After walking into the room, you are\nfaced with a riddle, \"Skull oh skull\",\nwhat does it mean?";
+        Room room14 = new Room(room14Description); //Room 14
+        
+        String room15Description= "This room is very dark, and there is\nlittle to no light. In the corners\nof the room is various disgusting looking tools,\nand an iron maiden, there are old bloodstains in\nthe middle of the room, a torture chamber perhaps?";
+        Room room15 = new Room(room15Description); //Room 15
 
         //dead-end, starts from room 9
-        String room16 = "This room has remains of an old forge,\nit's not working anymore.";
-        dungeon.addRoom(new Room(-1, 9, 17, -1, room16)); //Room 16
-        String room17 = "This room has a door with a spooky looking\nskull above the west door, there's wind coming from\nunderneath the door, there's a lock on it,\nbut its accessible from this side only.";
-        dungeon.addRoom(new Room(16, -1, -1, 10, room17)); //Room 17, has "one-way" door to room10
+        String room16Description = "This room has remains of an old forge,\nit's not working anymore.";
+        Room room16 = new Room(room16Description); //Room 16
+        
+        String room17Description = "This room has a door with a spooky looking\nskull above the west door, there's wind coming from\nunderneath the door, there's a lock on it,\nbut its accessible from this side only.";
+        Room room17 = new Room(room17Description); //Room 17, has "one-way" door to room10
+    
+        room0.setNorth(room13);
+        room0.setEast(room1);
+        room1.setNorth(room10);
+        room1.setEast(room2);
+        room2.setSouth(room3);
+        room2.setEast(room14);
+        room3.setEast(room4);
+        room4.setEast(room5);
+        room5.setNorth(room6);
+        room6.setNorth(room7);
+        room7.setNorth(room8);
+        room8.setWest(room9);
+        room9.setNorth(wonTheGame);
+        
+        room9.setWest(room16);
+        room16.setSouth(room17);
+        //room17.setWest(room10);
+        
+        //room10.setEast(null);
+        room10.setNorth(room11);
+        room11.setWest(room12);
+        room12.setSouth(room13);
+        
+        room14.setNorth(room15);
+        
+        dungeon.addRoom(room0);
+        dungeon.addRoom(room1);
+        dungeon.addRoom(room2);
+        dungeon.addRoom(room3);
+        dungeon.addRoom(room4);
+        dungeon.addRoom(room5);
+        dungeon.addRoom(room6);
+        dungeon.addRoom(room7);
+        dungeon.addRoom(room8);
+        dungeon.addRoom(room9);
+        dungeon.addRoom(room10);
+        dungeon.addRoom(room11);
+        dungeon.addRoom(room12);
+        dungeon.addRoom(room13);
+        dungeon.addRoom(room14);
+        dungeon.addRoom(room15);
+        dungeon.addRoom(room16);
+        dungeon.addRoom(room17);
+        dungeon.addRoom(wonTheGame);
     }
 
     public Dungeon getDungeon() {

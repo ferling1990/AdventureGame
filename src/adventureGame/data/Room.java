@@ -8,41 +8,62 @@ package adventureGame.data;
 //Lau, Mark, Jonatan og Mads
 
 public class Room {
-    private int north;
-    private int east;
-    private int south;
-    private int west;
+    private Room north;
+    private Room east;
+    private Room south;
+    private Room west;
     private String feelOfRoom;
     private Item item;
+    private boolean isFinalRoom;
 
     //Constructor with description and all room info, a -1 value on a direction means there is no door
-    public Room(int north, int east, int south, int west, String feelOfRoom) {
-        this.north = north;
-        this.east = east;
-        this.south = south;
-        this.west = west;
+    public Room(String feelOfRoom) {
+        this.north = null;
+        this.east = null;
+        this.south = null;
+        this.west = null;
         this.feelOfRoom = feelOfRoom;
+        isFinalRoom = false;
     }
     
-    public Room(int north, int east, int south, int west, String feelOfRoom, Item item) {
-        this.north = north;
-        this.east = east;
-        this.south = south;
-        this.west = west;
+    public Room(String feelOfRoom, Item item) {
+        this.north = null;
+        this.east = null;
+        this.south = null;
+        this.west = null;
         this.feelOfRoom = feelOfRoom;
         this.item = item;
+        isFinalRoom = false;
     }
     
+    public void setIsFinalRoom(boolean isFinalRoom) {
+        this.isFinalRoom = isFinalRoom;  
+    }
 
-    //Constructor without description and all room info, a -1 value on a direction means there is no door
-    public Room(int north, int east, int south, int west) {
-        this.north = north;
-        this.east = east;
-        this.south = south;
-        this.west = west;
-        feelOfRoom = "";
+    public void setNorth(Room other) {
+        other.south = this;
+        this.north = other;
+    }
+
+    public void setEast(Room other) {
+        other.west = this;
+        this.east = other;
+    }
+
+    public void setSouth(Room other) {
+        other.north = this;
+        this.south = other;
+    }
+
+    public void setWest(Room other) {
+        other.east = this;
+        this.west = other;
     }
     
+    public boolean getIsFinalRoom() {
+        return isFinalRoom;
+    }
+
     public Item getItem() {
         return item;
     }
@@ -51,19 +72,19 @@ public class Room {
         item = null;
     }
 
-    public int getNorth() {
+    public Room getNorth() {
         return north;
     }
 
-    public int getEast() {
+    public Room getEast() {
         return east;
     }
 
-    public int getSouth() {
+    public Room getSouth() {
         return south;
     }
 
-    public int getWest() {
+    public Room getWest() {
         return west;
     }
     
@@ -77,16 +98,16 @@ public class Room {
     @Override
     public String toString() {
         String viewOfRoom = feelOfRoom + "\n";
-        if(north >= 0) {
+        if(north != null) {
             viewOfRoom += "There is a door North. ";
         }
-        if(east >= 0) {
+        if(east != null) {
             viewOfRoom += "There is a door East. ";
         }
-        if(south >= 0) {
+        if(south != null) {
             viewOfRoom += "There is a door South. ";
         }
-        if(west >= 0) {
+        if(west != null) {
             viewOfRoom += "There is a door West. ";
         }
         return viewOfRoom;
