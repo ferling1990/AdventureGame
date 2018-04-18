@@ -13,6 +13,7 @@ public class Room {
     private int south;
     private int west;
     private String feelOfRoom;
+    private Item item;
 
     //Constructor with description and all room info, a -1 value on a direction means there is no door
     public Room(int north, int east, int south, int west, String feelOfRoom) {
@@ -22,6 +23,16 @@ public class Room {
         this.west = west;
         this.feelOfRoom = feelOfRoom;
     }
+    
+    public Room(int north, int east, int south, int west, String feelOfRoom, Item item) {
+        this.north = north;
+        this.east = east;
+        this.south = south;
+        this.west = west;
+        this.feelOfRoom = feelOfRoom;
+        this.item = item;
+    }
+    
 
     //Constructor without description and all room info, a -1 value on a direction means there is no door
     public Room(int north, int east, int south, int west) {
@@ -30,6 +41,14 @@ public class Room {
         this.south = south;
         this.west = west;
         feelOfRoom = "";
+    }
+    
+    public Item getItem() {
+        return item;
+    }
+    
+    public void removeItem() {
+        item = null;
     }
 
     public int getNorth() {

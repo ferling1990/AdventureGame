@@ -5,6 +5,7 @@ package adventureGame.logic;
 //Lau, Mark, Jonatan og Mads
 
 import adventureGame.data.Dungeon;
+import adventureGame.data.HealthPot;
 import adventureGame.data.Room;
 import java.util.Random;
 
@@ -44,11 +45,11 @@ public class World {
 
     // Boring hardcoded data that makes the maze. The constructor for rooms accepts 4 integers and a string description.
     // The constructer asks for the 4 neighboring roomnumbers, -1 means there is no door. 
-    //Room(north, east, south, west, String description)
+    // Room(north, east, south, west, String description)
     public void createWorld() {
         //main path
-        String room0 = "This room is very cold, and has a very humid feel,\nthe room has a torch on one side of the walls.";
-        dungeon.addRoom(new Room(13, 1, -1, -1, room0)); //Room 0, start
+        String room0 = "This room is very cold, and has a very humid feel,\nthe room has a torch on one side of the walls. HP pot in corner";
+        dungeon.addRoom(new Room(13, 1, -1, -1, room0, new HealthPot())); //Room 0, start
         String room1 = "The room's walls are very mossy, there's crates and\nother furniture, it looks like an old supply depot.";
         dungeon.addRoom(new Room(10, 2, -1, 0, room1)); //Room 1
         String room2 = "You now find yourself in a new room. This room is chilly,\nbut it feels a little warmer, than the last.";

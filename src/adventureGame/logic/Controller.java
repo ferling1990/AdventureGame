@@ -5,7 +5,7 @@ package adventureGame.logic;
 //Group 20
 //Lau, Mark, Jonatan og Mads
 import adventureGame.data.Dungeon;
-import adventureGame.data.Room;
+//import adventureGame.data.Room;
 import adventureGame.data.Player;
 import adventureGame.view.TUI;
 
@@ -34,6 +34,7 @@ public class Controller {
         ui.startMessage();
         //main loop that kees the game running till the end of maze is reached or player types quit.
         do {
+            System.out.println("hp: " +player.getHealth());
             System.out.println(dungeon.rooms.get(player.getCurrentRoom()));
 
             // this if-statement adds the 3 messages to the startroom. We have 
@@ -57,7 +58,7 @@ public class Controller {
             String direction = ui.askDirection();
             switch (direction) {
                 case "n":
-                    actCompleted = goNorth();
+                    actCompleted = goNorth(); //returns true if it was possible to go north
                     break;
                 case "e":
                     actCompleted = goEast();
@@ -67,6 +68,13 @@ public class Controller {
                     break;
                 case "w":
                     actCompleted = goWest();
+                    break;
+                case "loot":
+                    player.inventory.add(dungeon.rooms.get(player.getCurrentRoom()).getItem());
+                    dungeon.rooms.get(player.getCurrentRoom()).removeItem();
+                    break;
+                case "pot":
+                    player.usePot();
                     break;
                 case "help":
                     ui.listOfCommands();

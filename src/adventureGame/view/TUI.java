@@ -60,6 +60,8 @@ public class TUI implements UI{
         System.out.println("Type 'e' to go east");
         System.out.println("Type 's' to go south");
         System.out.println("Type 'w' to go west");
+        System.out.println("Type 'loot' to loot items");
+        System.out.println("Type 'pot' to consume health potion");
         System.out.println("Type 'quit' to quit game");
         System.out.println("");
         // add loot, combat, etcetc
