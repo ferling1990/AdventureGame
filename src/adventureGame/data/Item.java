@@ -1,9 +1,10 @@
 package adventureGame.data;
 
-public class Item {
+public abstract class Item {
       
-    public void use(Player player){
-        System.out.println("Used the item.");
-    }
+    public abstract void use(Player player);
+    
+    @Override
+    public abstract String toString();
     
 }

@@ -21,9 +21,9 @@ public class Player {
         this.currentRoom = startRoom;
     }
     
-    public void usePot(){
+    public void useItem(String itemName){
         for (int i = 0; i < inventory.size(); i++) {
-            if(inventory.get(i).toString().equals("HealthPot")) {
+            if(inventory.get(i).toString().equals(itemName)) {
                 inventory.get(i).use(this);
                 break;
                 //i = inventory.size() + 2;

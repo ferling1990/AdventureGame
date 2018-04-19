@@ -5,9 +5,11 @@ package adventureGame.logic;
 //Group 20
 //Lau, Mark, Jonatan og Mads
 import adventureGame.data.Dungeon;
-//import adventureGame.data.Room;
+import adventureGame.data.NoItemException;
 import adventureGame.data.Player;
 import adventureGame.view.TUI;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Controller {
 
@@ -16,72 +18,113 @@ public class Controller {
     private World world;
     private TUI ui;
     private int turn;
-    //private Actions act;
 
     public Controller() {
         ui = new TUI();
         world = new World();
         turn = 1;
-        //act = new Actions();
     }
 
     public void game() {
         createWorld();
         createPlayer();
-        //act = new Actions(dungeon, ui);
         ui.startMessage();
         //main loop that kees the game running till the end of maze is reached or player types quit.
         do {
-            System.out.println("hp: " +player.getHealth());
-            System.out.println(player.getCurrentRoom());
-
-            // this if-statement adds the 3 messages to the startroom. We have 
-            // decided to it this way, as previously mentioned our startroom is "random".
-            if (turn == 1) {
-                player.getCurrentRoom().addStringToDescription("\nUpon entering the room, you recognize it,");
-                player.getCurrentRoom().addStringToDescription("you've been here before, you recognize the elevator,");
-                player.getCurrentRoom().addStringToDescription("you are back where you started!");
-            }
-            playerAction(); //This is a switch that asks for player action with fitting cases.
+            ui.showPlayerHealth(player);
+            ui.printRoomDescription(player.getCurrentRoom());
+            addExtraDescriptionToStartRoom();
+            
+            action();
             turn++; // counts the number of turns used.
-        } while (!player.getCurrentRoom().getIsFinalRoom()); //game ends when current room == 99 (the end room).
+        } while (!player.getCurrentRoom().getIsFinalRoom()); //game ends when reaching the final room (the only one with getIsFinalRoom returns true)
         ui.winningMessage();
     }
-    
-    void createWorld() {
+
+    public void createWorld() {
         world.createWorld();
         dungeon = world.getDungeon();
     }
-    
-    void createPlayer() {
+
+    public void createPlayer() {
         player = new Player("Player1", dungeon.rooms.get(world.generateStartRoom())); //generateStartRoom randomizes between 4 possible startrooms
+    }
+
+    // this if-statement adds the 3 messages to the startroom. We have 
+    // decided to it this way, as previously mentioned our startroom is "random".
+    public void addExtraDescriptionToStartRoom() {
+        if (turn == 1) {
+            player.getCurrentRoom().addStringToDescription("\nUpon entering the room, you recognize it,");
+            player.getCurrentRoom().addStringToDescription("you've been here before, you recognize the elevator,");
+            player.getCurrentRoom().addStringToDescription("you are back where you started!");
+        }
+    }
+
+    public void action() {
+        int count = 0;
+        int maxTries = 3;
+        while (count++ < maxTries) {
+            String action = ui.askForAction();
+            try {
+                playerAction(action); //This is a switch that asks for player action with fitting cases.
+                count = maxTries;
+            } catch (IllegalArgumentException e) {
+                ui.invalidCommand();
+            } catch (NoDoorException ex) {
+                ui.noDoorMessage();
+            } catch (NoItemException ey) {
+                ui.noLootMessage();
+            }
+        }
     }
 
 //    Method that asks the player for an action
 //    and through the switch tries to do something
-    public void playerAction() {
-        boolean actCompleted = false;
-        while(!actCompleted)  {
-            String direction = ui.askDirection();
-            switch (direction) {
+    public void playerAction(String action) throws IllegalArgumentException, NoDoorException, NoItemException {
+            switch (action) {
                 case "n":
-                    actCompleted = goNorth(); //returns true if it was possible to go north
+                    try {
+                        goNorth();
+                    }
+                    catch (NoDoorException e) {
+                        throw e;
+                    }
                     break;
                 case "e":
-                    actCompleted = goEast();
+                    try {
+                        goEast();
+                    }
+                    catch (NoDoorException e) {
+                        throw e;
+                    }
                     break;
                 case "s":
-                    actCompleted = goSouth();
+                    try {
+                        goSouth();
+                    }
+                    catch (NoDoorException e) {
+                        throw e;
+                    }
                     break;
                 case "w":
-                    actCompleted = goWest();
+                    try {
+                        goWest();
+                    }
+                    catch (NoDoorException e) {
+                        throw e;
+                    }
                     break;
                 case "loot":
-                    player.inventory.add(player.getCurrentRoom().getItem());
-                    player.getCurrentRoom().removeItem();
+                    try {
+                        player.inventory.add(player.getCurrentRoom().getItem());
+                        player.getCurrentRoom().removeItem();
+                    }
+                    catch (NoItemException e){
+                        throw e;
+                    }
                     break;
                 case "pot":
-                    player.usePot();
+                    player.useItem("HealthPot");
                     break;
                 case "help":
                     ui.listOfCommands();
@@ -90,67 +133,60 @@ public class Controller {
                     System.out.println("GG");
                     System.exit(0);
                 default:
-                    ui.invalidCommand();
+                    throw new IllegalArgumentException();
+                //ui.invalidCommand();
             }
-        }
+        //}
     }
 
     //Checks if there is a door north with checkDirection(), moves to room north if there is.
-    public boolean goNorth() {
-        if (checkDirection(1)) {
+    public void goNorth() throws NoDoorException {
+        if (checkForDoor("north")) {
             player.setCurrentRoom(player.getCurrentRoom().getNorth()); //set current room to the room north
-            return true;
         } else {
-            ui.noDoorMessage();
-            return false;
+            throw new NoDoorException();
         }
     }
 
     //Checks if there is a door east with checkDirection(), moves to room east if there is.
-    public boolean goEast() {
-        if (checkDirection(2)) {
+    public void goEast() throws NoDoorException {
+        if (checkForDoor("east")) {
             player.setCurrentRoom(player.getCurrentRoom().getEast()); //set current room to the room east
-            return true;
         } else {
-            ui.noDoorMessage();
-            return false;
+            throw new NoDoorException();
         }
     }
 
     //Checks if there is a door south with checkDirection(), moves to room south if there is.
-    public boolean goSouth() {
-        if (checkDirection(3)) {
+    public void goSouth() throws NoDoorException {
+        if (checkForDoor("south")) {
             player.setCurrentRoom(player.getCurrentRoom().getSouth()); //set current room to the room south
-            return true;
         } else {
-            ui.noDoorMessage();
-            return false;
+            throw new NoDoorException();
         }
     }
 
     //Checks if there is a door west with checkDirection(), moves to room west if there is.
-    public boolean goWest() {
-        if (checkDirection(4)) {
+    public void goWest() throws NoDoorException {
+        if (checkForDoor("west")) {
             player.setCurrentRoom(player.getCurrentRoom().getWest()); //set current room to the room west
-            return true;
         } else {
-            ui.noDoorMessage();
-            return false;
+            throw new NoDoorException();
         }
     }
 
     //Determines if the chosen direction is possible. If there is no door in a
     //certain direction, its value is -1, so we check if the value is 0 or higher.
     //the values that are 0 or higher matches that room's index in the dungeon rooms arraylist.
-    private boolean checkDirection(int direction) {
+    private boolean checkForDoor(String direction) {
         switch (direction) {
-            case 1:
+            case "north":
                 return player.getCurrentRoom().getNorth() != null;
-            case 2:
+            case "east":
                 return player.getCurrentRoom().getEast() != null;
-            case 3:
+            case "south":
                 return player.getCurrentRoom().getSouth() != null;
-            case 4:
+            case "west":
                 return player.getCurrentRoom().getWest() != null;
             default:
                 return false;

@@ -48,19 +48,19 @@ public class World {
     // Room(north, east, south, west, String description)
     public void createWorld() {
         //main path
-        String room0Description = "This room is very cold, and has a very humid feel,\nthe room has a torch on one side of the walls. HP pot in corner";
-        Room room0 = new Room(room0Description, new HealthPot()); //Room 0, start
+        String room0Description = "This room is very cold, and has a very humid feel, the room has a torch on one side of the walls.";
+        Room room0 = new Room(room0Description, new HealthPot(), "There is a healthpot in the corner."); //Room 0, start
         
-        String room1Description = "The room's walls are very mossy, there's crates and\nother furniture, it looks like an old supply depot.";
+        String room1Description = "The room's walls are very mossy, there's crates and other furniture, it looks like an old supply depot.";
         Room room1 = new Room(room1Description); //Room 1
         
-        String room2Description = "You now find yourself in a new room. This room is chilly,\nbut it feels a little warmer, than the last.";
+        String room2Description = "You now find yourself in a new room. This room is chilly, but it feels a little warmer, than the last.";
         Room room2 = new Room(room2Description); //Room 2
 
-        String room3Description = "This room's floor is wet, and slippery,\nthere's a Skull hanging above the door leading east.";
+        String room3Description = "This room's floor is wet, and slippery, there's a Skull hanging above the door leading east.";
         Room room3 = new Room(room3Description); //Room 3
         
-        String room4Description = "This rooms floor is still wet, but this room is a corridor\nwith little to no light, the corridor is long and thin.";
+        String room4Description = "This rooms floor is still wet, but this room is a corridor with little to no light, the corridor is long and thin.";
         Room room4 = new Room(room4Description); //Room 4
         
         String room5Description= "Entering the room you find some crates.";
@@ -69,13 +69,13 @@ public class World {
         String room6Description = "This room is a corridor with water covering your feet, its cold.";
         Room room6 = new Room(room6Description); //Room 6
         
-        String room7Description = "This room is a corridor, the southern part\nis covered in water, while the northern part is dry.";
+        String room7Description = "This room is a corridor, the southern part is covered in water, while the northern part is dry.";
         Room room7 = new Room(room7Description); //Room 7
         
-        String room8Description = "This room has a torch on one of the walls,\nthis room looks like an old entrance, there's dynamite boxes,\nbut they are all covered in water, no use.";
+        String room8Description = "This room has a torch on one of the walls, this room looks like an old entrance,\nthere's dynamite boxes, but they are all covered in water, no use.";
         Room room8 = new Room(room8Description); //Room 8
         
-        String room9Description = "This room has a very cold floor, there's little to no light,\nbut a skull is hanging above the west door.";
+        String room9Description = "This room has a very cold floor, there's little to no light, but a skull is hanging above the west door.";
         Room room9 = new Room(room9Description); //Room 9
         
         String roomEndDescription = "You won.";
@@ -83,30 +83,30 @@ public class World {
         wonTheGame.setIsFinalRoom(true);
 
         //loop, starts from room 0 and 1
-        String room10Description = "This room is very humid and cold. The east door\nis locked with a mysterious looking skull hanging above\nthe door frame, there's wind coming from beneath the door.";
+        String room10Description = "This room is very humid and cold. The east door is locked with a mysterious looking\nskull hanging above the door frame, there's wind coming from beneath the door.";
         Room room10 = new Room(room10Description); //Room 10
         
         String room11Description = "This room is nothing special, there is old clothe laying around.";
         Room room11 = new Room(room11Description);
         
-        String room12Description = "This room has a very humid feeling,\nand a torch is lit on one of the walls.";
+        String room12Description = "This room has a very humid feeling, and a torch is lit on one of the walls.";
         Room room12 = new Room(room12Description); //Room 12
         
-        String room13Description = "This room is a long corridor, there\nis light at the end of the tunnel!";
+        String room13Description = "This room is a long corridor, there is light at the end of the tunnel!";
         Room room13 = new Room(room13Description); //Room 13
 
         //dead-end, starts from room 2
-        String room14Description = "After walking into the room, you are\nfaced with a riddle, \"Skull oh skull\",\nwhat does it mean?";
+        String room14Description = "After walking into the room, you are faced with a riddle, \"Skull oh skull\", what does it mean?";
         Room room14 = new Room(room14Description); //Room 14
         
-        String room15Description= "This room is very dark, and there is\nlittle to no light. In the corners\nof the room is various disgusting looking tools,\nand an iron maiden, there are old bloodstains in\nthe middle of the room, a torture chamber perhaps?";
+        String room15Description= "This room is very dark, and there is little to no light. In the corners of the room is various disgusting looking tools,\nand an iron maiden, there are old bloodstains in the middle of the room, a torture chamber perhaps?";
         Room room15 = new Room(room15Description); //Room 15
 
         //dead-end, starts from room 9
-        String room16Description = "This room has remains of an old forge,\nit's not working anymore.";
+        String room16Description = "This room has remains of an old forge, it's not working anymore.";
         Room room16 = new Room(room16Description); //Room 16
         
-        String room17Description = "This room has a door with a spooky looking\nskull above the west door, there's wind coming from\nunderneath the door, there's a lock on it,\nbut its accessible from this side only.";
+        String room17Description = "This room has a door with a spooky looking skull above the west door, there's wind coming from\nunderneath the door, there's a lock on it, but its accessible from this side only.";
         Room room17 = new Room(room17Description); //Room 17, has "one-way" door to room10
     
         room0.setNorth(room13);

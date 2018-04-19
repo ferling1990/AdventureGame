@@ -5,6 +5,8 @@ package adventureGame.view;
 //Group 20
 //Lau, Mark, Jonatan og Mads
 
+import adventureGame.data.Player;
+import adventureGame.data.Room;
 import java.util.Scanner;
 
 public class TUI implements UI{
@@ -15,7 +17,7 @@ public class TUI implements UI{
     }
 
     @Override
-    public String askDirection() {
+    public String askForAction() {
         System.out.println("What is your next action?");
         return sc.nextLine().toLowerCase();
     }
@@ -32,9 +34,8 @@ public class TUI implements UI{
 
     @Override
     public void startMessage() {
-        System.out.println("After waking up, you find yourself in a room with a ");
-        System.out.println("very dim light coming from a torch on one side of the wall.");
-        System.out.println("You scout the room, behind you is an elevator which isn't powered.");
+        System.out.println("After waking up, you find yourself in a room with a very dim light coming from a torch");
+        System.out.println("on one side of the wall. You scout the room, behind you is an elevator which isn't powered.");
         System.out.println("There's a note hanging on the elevator door, it reads:");
         System.out.println("\"Welcome.  This is the skull cavern, to prove your worth to the king, you must complete this trail.");
         System.out.println("You have to find the right door in this maze, and with that you will find your freedom.");
@@ -65,6 +66,21 @@ public class TUI implements UI{
         System.out.println("Type 'quit' to quit game");
         System.out.println("");
         // add loot, combat, etcetc
+    }
+
+    @Override
+    public void showPlayerHealth(Player player) {
+        System.out.println("hp: " +player.getHealth());
+    }
+
+    @Override
+    public void printRoomDescription(Room room) {
+        System.out.println(room); //Prints the room description
+    }
+
+    @Override
+    public void noLootMessage() {
+        System.out.println("There is nothing to loot in this room.");
     }
     
 }

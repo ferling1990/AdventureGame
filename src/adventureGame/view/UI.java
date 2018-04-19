@@ -2,16 +2,23 @@
 package adventureGame.view;
 
 //Group 20
+
+import adventureGame.data.Player;
+import adventureGame.data.Room;
+
 //Lau, Mark, Jonatan og Mads
 
 public interface UI {
 
-    public String askDirection();
+    public String askForAction();
     public void winningMessage();
     public void deathMessage();
     public void startMessage();
     public void invalidCommand();
     public void noDoorMessage();
+    public void noLootMessage();
     public void listOfCommands();
+    public void showPlayerHealth(Player player);
+    public void printRoomDescription(Room room);
     
 }
