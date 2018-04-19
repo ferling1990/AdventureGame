@@ -1,10 +1,10 @@
-//Contains a description of room as well as info about neighboor rooms.
-//We have chosen to keep the data of neighboor rooms as integers that
-//matches those rooms index-position in the room arraylist
+//Contains a description of room as well as pointers to neighboor rooms.
+
 package adventureGame.data;
 
 //Group 20
 //Lau, Mark, Jonatan og Mads
+
 public class Room {
 
     private Room north;
@@ -14,9 +14,10 @@ public class Room {
     private String feelOfRoom;
     private Item item;
     private String itemDescription;
-    private boolean isFinalRoom;
+    private boolean isFinalRoom; // This should only be true for the room that wins you the game to enter.
 
-    //Constructor with description and all room info, a -1 value on a direction means there is no door
+    //Constructor with description, a null value on a direction means there is no door
+    //so a room as standard has no doors when first instantiated.
     public Room(String feelOfRoom) {
         this.north = null;
         this.east = null;
@@ -28,6 +29,8 @@ public class Room {
         itemDescription = "";
     }
 
+    //Constructor with description and item, a null value on a direction means there is no door
+    //so a room as standard has no doors when first instantiated.
     public Room(String feelOfRoom, Item item, String itemDescription) {
         this.north = null;
         this.east = null;
@@ -43,6 +46,7 @@ public class Room {
         this.isFinalRoom = isFinalRoom;
     }
 
+    //Connects the north door to "other" room and changes the "other" rooms south to match the connection
     public void setNorth(Room other) {
         other.south = this;
         this.north = other;
@@ -71,6 +75,8 @@ public class Room {
         return isFinalRoom;
     }
 
+    //if there is an item in the room it returns it. If there isn't 
+    //it throws an exception.
     public Item getItem() throws NoItemException {
         if (item != null) {
             return item;
@@ -80,6 +86,8 @@ public class Room {
         }
     }
 
+    //removes the item from the room. Should always be done after succesfully 
+    //using the "getItem()" method.
     public void removeItem() {
         item = null;
         itemDescription = "";

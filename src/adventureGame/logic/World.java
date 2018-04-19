@@ -43,11 +43,9 @@ public class World {
         return startRoomNumber;
     }
 
-    // Boring hardcoded data that makes the maze. The constructor for rooms accepts 4 integers and a string description.
-    // The constructer asks for the 4 neighboring roomnumbers, -1 means there is no door. 
-    // Room(north, east, south, west, String description)
+    // Boring hardcoded data that makes the maze.
     public void createWorld() {
-        //main path
+        //Creating all the rooms
         String room0Description = "This room is very cold, and has a very humid feel, the room has a torch on one side of the walls.";
         Room room0 = new Room(room0Description, new HealthPot(), "There is a healthpot in the corner."); //Room 0, start
         
@@ -109,6 +107,7 @@ public class World {
         String room17Description = "This room has a door with a spooky looking skull above the west door, there's wind coming from\nunderneath the door, there's a lock on it, but its accessible from this side only.";
         Room room17 = new Room(room17Description); //Room 17, has "one-way" door to room10
     
+        // Connect all the rooms
         room0.setNorth(room13);
         room0.setEast(room1);
         room1.setNorth(room10);
@@ -134,6 +133,8 @@ public class World {
         
         room14.setNorth(room15);
         
+        
+        //Add the rooms to the arraylist in dungeon.
         dungeon.addRoom(room0);
         dungeon.addRoom(room1);
         dungeon.addRoom(room2);

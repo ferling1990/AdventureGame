@@ -4,13 +4,12 @@ package adventureGame.logic;
 
 //Group 20
 //Lau, Mark, Jonatan og Mads
+
 import adventureGame.data.NoDoorException;
 import adventureGame.data.Dungeon;
 import adventureGame.data.NoItemException;
 import adventureGame.data.Player;
 import adventureGame.view.TUI;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Controller {
 
@@ -52,7 +51,7 @@ public class Controller {
     }
 
     // this if-statement adds the 3 messages to the startroom. We have 
-    // decided to it this way, as previously mentioned our startroom is "random".
+    // decided to do it this way, as previously mentioned our startroom is "random".
     public void addExtraDescriptionToStartRoom() {
         if (turn == 1) {
             player.getCurrentRoom().addStringToDescription("\nUpon entering the room, you recognize it,");
@@ -61,6 +60,9 @@ public class Controller {
         }
     }
 
+    // This method runs a loop on playerAction until a valid command is used or
+    // an invalid command has been attempted 3 times. This method catches all the 
+    // exceptions.
     public void action() {
         int count = 0;
         int maxTries = 3;
@@ -79,8 +81,8 @@ public class Controller {
         }
     }
 
-//    Method that asks the player for an action
-//    and through the switch tries to do something
+//    Method that receives the attempted action from the user
+//    and through the switch tries to do something.
     public void playerAction(String action) throws IllegalArgumentException, NoDoorException, NoItemException {
             switch (action) {
                 case "n":

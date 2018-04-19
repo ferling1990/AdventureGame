@@ -1,7 +1,15 @@
+//Health pot class, inherites from Item. This is a subclass.
+
 package adventureGame.data;
+
+//Group 20
+//Lau, Mark, Jonatan og Mads
 
 public class HealthPot extends Item {
 
+    //Max health for a player is 100, so if the players health is 80 or above 
+    // it is set to 100, otherwise +20. After consumption it removes itself from
+    // inventory list.
     @Override
     public void use(Player player) {
         if (player.getHealth() > 80) {
@@ -12,6 +20,8 @@ public class HealthPot extends Item {
         player.inventory.remove(this);
     }
 
+    // This string is important, as it is used to search for different items in
+    // in the players inventory.
     @Override
     public String toString() {
         return "HealthPot";

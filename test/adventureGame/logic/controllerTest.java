@@ -1,4 +1,9 @@
+// Doesn't do anything yet!
+
 package adventureGame.logic;
+
+//Group 20
+//Lau, Mark, Jonatan og Mads
 
 import org.junit.After;
 import org.junit.AfterClass;
