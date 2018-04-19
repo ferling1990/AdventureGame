@@ -1,5 +1,5 @@
 
-package adventureGame.logic;
+package adventureGame.data;
 
 /**
  *

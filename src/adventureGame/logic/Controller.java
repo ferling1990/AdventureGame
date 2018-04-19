@@ -4,6 +4,7 @@ package adventureGame.logic;
 
 //Group 20
 //Lau, Mark, Jonatan og Mads
+import adventureGame.data.NoDoorException;
 import adventureGame.data.Dungeon;
 import adventureGame.data.NoItemException;
 import adventureGame.data.Player;
@@ -84,7 +85,7 @@ public class Controller {
             switch (action) {
                 case "n":
                     try {
-                        goNorth();
+                        player.goNorth();
                     }
                     catch (NoDoorException e) {
                         throw e;
@@ -92,7 +93,7 @@ public class Controller {
                     break;
                 case "e":
                     try {
-                        goEast();
+                        player.goEast();
                     }
                     catch (NoDoorException e) {
                         throw e;
@@ -100,7 +101,7 @@ public class Controller {
                     break;
                 case "s":
                     try {
-                        goSouth();
+                        player.goSouth();
                     }
                     catch (NoDoorException e) {
                         throw e;
@@ -108,7 +109,7 @@ public class Controller {
                     break;
                 case "w":
                     try {
-                        goWest();
+                        player.goWest();
                     }
                     catch (NoDoorException e) {
                         throw e;
@@ -134,63 +135,7 @@ public class Controller {
                     System.exit(0);
                 default:
                     throw new IllegalArgumentException();
-                //ui.invalidCommand();
             }
-        //}
-    }
-
-    //Checks if there is a door north with checkDirection(), moves to room north if there is.
-    public void goNorth() throws NoDoorException {
-        if (checkForDoor("north")) {
-            player.setCurrentRoom(player.getCurrentRoom().getNorth()); //set current room to the room north
-        } else {
-            throw new NoDoorException();
-        }
-    }
-
-    //Checks if there is a door east with checkDirection(), moves to room east if there is.
-    public void goEast() throws NoDoorException {
-        if (checkForDoor("east")) {
-            player.setCurrentRoom(player.getCurrentRoom().getEast()); //set current room to the room east
-        } else {
-            throw new NoDoorException();
-        }
-    }
-
-    //Checks if there is a door south with checkDirection(), moves to room south if there is.
-    public void goSouth() throws NoDoorException {
-        if (checkForDoor("south")) {
-            player.setCurrentRoom(player.getCurrentRoom().getSouth()); //set current room to the room south
-        } else {
-            throw new NoDoorException();
-        }
-    }
-
-    //Checks if there is a door west with checkDirection(), moves to room west if there is.
-    public void goWest() throws NoDoorException {
-        if (checkForDoor("west")) {
-            player.setCurrentRoom(player.getCurrentRoom().getWest()); //set current room to the room west
-        } else {
-            throw new NoDoorException();
-        }
-    }
-
-    //Determines if the chosen direction is possible. If there is no door in a
-    //certain direction, its value is -1, so we check if the value is 0 or higher.
-    //the values that are 0 or higher matches that room's index in the dungeon rooms arraylist.
-    private boolean checkForDoor(String direction) {
-        switch (direction) {
-            case "north":
-                return player.getCurrentRoom().getNorth() != null;
-            case "east":
-                return player.getCurrentRoom().getEast() != null;
-            case "south":
-                return player.getCurrentRoom().getSouth() != null;
-            case "west":
-                return player.getCurrentRoom().getWest() != null;
-            default:
-                return false;
-        }
     }
 
 }

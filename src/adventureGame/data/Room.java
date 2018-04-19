@@ -63,6 +63,10 @@ public class Room {
         this.west = other;
     }
 
+    public String getFeelOfRoom() {
+        return feelOfRoom;
+    }
+
     public boolean getIsFinalRoom() {
         return isFinalRoom;
     }
