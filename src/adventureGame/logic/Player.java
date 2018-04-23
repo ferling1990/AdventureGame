@@ -1,20 +1,23 @@
 //Player class, most important info in player is the currentRoom.
-
 package adventureGame.logic;
 
 //Group 20
 //Lau, Mark, Jonatan og Mads
-
 import adventureGame.data.Item;
 import adventureGame.data.NoDoorException;
 import adventureGame.data.Room;
 import java.util.ArrayList;
 
 public class Player {
+
     private String name;
     private int health;
     private Room currentRoom;
     public ArrayList<Item> inventory;
+    private int attackPower = 1;
+    private int defense = 0;
+    private int damageOutput;
+    private int damageInput;
 
     // Constructor
     public Player(String name, Room startRoom) {
@@ -23,17 +26,17 @@ public class Player {
         this.health = 50;
         this.currentRoom = startRoom;
     }
-    
+
     //Searches inventory for specific item, if it is there it is used.
-    public void useItem(String itemName){
+    public void useItem(String itemName) {
         for (int i = 0; i < inventory.size(); i++) {
-            if(inventory.get(i).toString().equals(itemName)) {
+            if (inventory.get(i).toString().equals(itemName)) {
                 inventory.get(i).use(this);
                 break;
             }
         }
     }
-    
+
     //Checks if there is a door north with checkDirection(), moves to room north if there is.
     //Otherwise it throws an exception.
     public void goNorth() throws NoDoorException {
@@ -99,6 +102,41 @@ public class Player {
         this.health = health;
     }
 
+    public void setAttackPower(int attackPower) {
+        this.attackPower = attackPower;
+    }
+
+    public int getAttackPower() {
+        return attackPower;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public int getDamageOutput(int damageOutput) {
+        int output;
+        int damage = getDamageInput();
+        int block = getDefense();
+        if (block == 0) {
+            block = 100;
+        }
+        output = (1 - (block / 100)) * damage;
+        return output;
+    }
+
+    public int getDamageInput() {
+        return damageInput;
+    }
+
+    public void setDamageInput(int damageInput) {
+        this.damageInput = damageInput;
+    }
+
     public Room getCurrentRoom() {
         return currentRoom;
     }
@@ -110,5 +148,5 @@ public class Player {
     public String getName() {
         return name;
     }
-    
+
 }
