@@ -3,6 +3,9 @@
 package adventureGame.data;
 
 //Group 20
+
+import adventureGame.logic.Player;
+
 //Lau, Mark, Jonatan og Mads
 
 public class HealthPot extends Item {

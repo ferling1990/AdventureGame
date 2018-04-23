@@ -4,11 +4,9 @@ package adventureGame.logic;
 
 //Group 20
 //Lau, Mark, Jonatan og Mads
-
 import adventureGame.data.NoDoorException;
 import adventureGame.data.Dungeon;
 import adventureGame.data.NoItemException;
-import adventureGame.data.Player;
 import adventureGame.view.TUI;
 
 public class Controller {
@@ -34,7 +32,7 @@ public class Controller {
             ui.showPlayerHealth(player);
             ui.printRoomDescription(player.getCurrentRoom());
             addExtraDescriptionToStartRoom();
-            
+
             action();
             turn++; // counts the number of turns used.
         } while (!player.getCurrentRoom().getIsFinalRoom()); //game ends when reaching the final room (the only one with getIsFinalRoom returns true)
@@ -67,9 +65,10 @@ public class Controller {
         int count = 0;
         int maxTries = 3;
         while (count++ < maxTries) {
-            String action = ui.askForAction();
+            String actionString = ui.askForAction();
             try {
-                playerAction(action); //This is a switch that asks for player action with fitting cases.
+                ActionType actionEnum = actionConverter(actionString);
+                playerAction(actionEnum); //This is a switch that asks for player action with fitting cases.
                 count = maxTries;
             } catch (IllegalArgumentException e) {
                 ui.invalidCommand();
@@ -81,63 +80,69 @@ public class Controller {
         }
     }
 
+    public ActionType actionConverter(String action) {
+        ActionType actionType;
+        try {
+            actionType = ActionType.valueOf(action);
+            } catch (IllegalArgumentException e) {
+            throw e;
+        }
+        return actionType;
+    }
+
 //    Method that receives the attempted action from the user
 //    and through the switch tries to do something.
-    public void playerAction(String action) throws IllegalArgumentException, NoDoorException, NoItemException {
-            switch (action) {
-                case "n":
-                    try {
-                        player.goNorth();
-                    }
-                    catch (NoDoorException e) {
-                        throw e;
-                    }
-                    break;
-                case "e":
-                    try {
-                        player.goEast();
-                    }
-                    catch (NoDoorException e) {
-                        throw e;
-                    }
-                    break;
-                case "s":
-                    try {
-                        player.goSouth();
-                    }
-                    catch (NoDoorException e) {
-                        throw e;
-                    }
-                    break;
-                case "w":
-                    try {
-                        player.goWest();
-                    }
-                    catch (NoDoorException e) {
-                        throw e;
-                    }
-                    break;
-                case "loot":
-                    try {
-                        player.inventory.add(player.getCurrentRoom().getItem());
-                        player.getCurrentRoom().removeItem();
-                    }
-                    catch (NoItemException e){
-                        throw e;
-                    }
-                    break;
-                case "pot":
-                    player.useItem("HealthPot");
-                    break;
-                case "help":
-                    ui.listOfCommands();
-                    break;
-                case "quit":
-                    System.out.println("GG");
-                    System.exit(0);
-                default:
-                    throw new IllegalArgumentException();
-            }
+    public void playerAction(ActionType action) throws IllegalArgumentException, NoDoorException, NoItemException {
+        switch (action) {
+            case north:
+                try {
+                    player.goNorth();
+                } catch (NoDoorException e) {
+                    throw e;
+                }
+                break;
+            case east:
+                try {
+                    player.goEast();
+                } catch (NoDoorException e) {
+                    throw e;
+                }
+                break;
+            case south:
+                try {
+                    player.goSouth();
+                } catch (NoDoorException e) {
+                    throw e;
+                }
+                break;
+            case west:
+                try {
+                    player.goWest();
+                } catch (NoDoorException e) {
+                    throw e;
+                }
+                break;
+            case loot:
+                try {
+                    player.inventory.add(player.getCurrentRoom().getItem());
+                    player.getCurrentRoom().removeItem();
+                } catch (NoItemException e) {
+                    throw e;
+                }
+                break;
+            case pot:
+                player.useItem("HealthPot");
+                break;
+            case help:
+                ui.listOfCommands();
+                break;
+            case quit:
+                System.out.println("GG");
+                System.exit(0);
+            default:
+                System.out.println("testtesttest");
+                throw new IllegalArgumentException();
+        }
     }
 
 }

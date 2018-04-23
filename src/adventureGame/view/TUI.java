@@ -5,8 +5,9 @@ package adventureGame.view;
 //Group 20
 //Lau, Mark, Jonatan og Mads
 
-import adventureGame.data.Player;
+import adventureGame.logic.Player;
 import adventureGame.data.Room;
+import adventureGame.logic.ActionType;
 import java.util.Scanner;
 
 public class TUI implements UI{
@@ -57,13 +58,13 @@ public class TUI implements UI{
     @Override
     public void listOfCommands() {
         System.out.println("");
-        System.out.println("Type 'n' to go north");
-        System.out.println("Type 'e' to go east");
-        System.out.println("Type 's' to go south");
-        System.out.println("Type 'w' to go west");
-        System.out.println("Type 'loot' to loot items");
-        System.out.println("Type 'pot' to consume health potion");
-        System.out.println("Type 'quit' to quit game");
+        System.out.println("Type " +ActionType.north.toString() + " to go north");
+        System.out.println("Type " +ActionType.east.toString() + " to go east");
+        System.out.println("Type " +ActionType.south.toString() + " to go south");
+        System.out.println("Type " +ActionType.west.toString() + " to go west");
+        System.out.println("Type " +ActionType.loot.toString() + " to loot items");
+        System.out.println("Type " +ActionType.pot.toString() + " to consume health potion");
+        System.out.println("Type " +ActionType.quit.toString() + " to quit game");
         System.out.println("");
         // add loot, combat, etcetc
     }

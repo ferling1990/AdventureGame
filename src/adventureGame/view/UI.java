@@ -3,7 +3,7 @@ package adventureGame.view;
 
 //Group 20
 
-import adventureGame.data.Player;
+import adventureGame.logic.Player;
 import adventureGame.data.Room;
 
 //Lau, Mark, Jonatan og Mads

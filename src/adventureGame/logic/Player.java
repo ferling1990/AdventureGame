@@ -1,10 +1,13 @@
 //Player class, most important info in player is the currentRoom.
 
-package adventureGame.data;
+package adventureGame.logic;
 
 //Group 20
 //Lau, Mark, Jonatan og Mads
 
+import adventureGame.data.Item;
+import adventureGame.data.NoDoorException;
+import adventureGame.data.Room;
 import java.util.ArrayList;
 
 public class Player {
