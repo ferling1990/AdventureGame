@@ -10,13 +10,10 @@ import exceptions.NoItemException;
 
 public class Room {
 
-    private Room north;
-    private Room east;
-    private Room south;
-    private Room west;
-    private String feelOfRoom;
+    private Room north, east, south, west;
+    private String feelOfRoom, itemDescription, monsterDescription;
     private Item item;
-    private String itemDescription;
+    private Monster monster;
     private boolean isFinalRoom; // This should only be true for the room that wins you the game to enter.
 
     //Constructor with description, a null value on a direction means there is no door
@@ -117,6 +114,29 @@ public class Room {
         feelOfRoom += description;
         feelOfRoom += "\n";
     }
+
+    public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }
+
+    public Monster getMonster() {
+        return monster;
+    }
+
+    public void setMonster(Monster monster) {
+        this.monster = monster;
+    }
+    
+    public void removeMonster() {
+        item = null;
+        itemDescription = "";
+    }
+    
+    
 
     //toString method adds a string for each door(if there is one) and adds with the description string feelOfRoom.
     @Override

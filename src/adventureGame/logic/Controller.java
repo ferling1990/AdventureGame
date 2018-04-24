@@ -133,6 +133,9 @@ public class Controller {
             case pot:
                 player.useItem("HealthPot");
                 break;
+            case attack:
+                //combatController(player, player.getCurrentRoom().getMonster, ui);
+                break;
             case help:
                 ui.listOfCommands();
                 break;
