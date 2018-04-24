@@ -4,6 +4,7 @@ package adventureGame.data;
 
 //Group 20
 
+import adventureGame.data.monsters.Monster;
 import exceptions.NoItemException;
 
 //Lau, Mark, Jonatan og Mads
@@ -27,6 +28,7 @@ public class Room {
         isFinalRoom = false;
         item = null;
         itemDescription = "";
+        monster = null;
     }
 
     //Constructor with description and item, a null value on a direction means there is no door
@@ -40,6 +42,7 @@ public class Room {
         this.item = item;
         this.itemDescription = itemDescription;
         isFinalRoom = false;
+        monster = null;
     }
 
     public void setIsFinalRoom(boolean isFinalRoom) {

@@ -1,4 +1,4 @@
-package adventureGame.data;
+package adventureGame.data.monsters;
 
 public class MonsterImp extends Monster {
 
