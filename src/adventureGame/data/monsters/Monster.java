@@ -1,14 +1,33 @@
 package adventureGame.data.monsters;
 
+import adventureGame.data.Item;
+import exceptions.MonsterDeadException;
+
 public class Monster {
     private String name;
     private int health;
     private int attackPower;
     private int specialAttack;
+    private Item item;
     
     public Monster() {
         this.health = 10;
         this.attackPower = 1;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+    
+    public void loseHealth(int damageTaken) throws MonsterDeadException {
+        health -= damageTaken;
+        if (health <= 0) {
+            throw new MonsterDeadException();
+        }
     }
 
     public String getName() {

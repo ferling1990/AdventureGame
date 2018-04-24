@@ -8,6 +8,9 @@ import exceptions.NoDoorException;
 import adventureGame.data.Dungeon;
 import exceptions.NoItemException;
 import adventureGame.view.TUI;
+import exceptions.PlayerDeadException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Controller {
 
@@ -16,6 +19,7 @@ public class Controller {
     private World world;
     private TUI ui;
     private int turn;
+    private Combat combat;
 
     public Controller() {
         ui = new TUI();
@@ -76,6 +80,9 @@ public class Controller {
                 ui.noDoorMessage();
             } catch (NoItemException ey) {
                 ui.noLootMessage();
+            } catch (PlayerDeadException ex) {
+                ui.deathMessage();
+                System.exit(0);
             }
         }
     }
@@ -92,7 +99,7 @@ public class Controller {
 
 //    Method that receives the attempted action from the user
 //    and through the switch tries to do something.
-    public void playerAction(ActionType action) throws IllegalArgumentException, NoDoorException, NoItemException {
+    public void playerAction(ActionType action) throws IllegalArgumentException, NoDoorException, NoItemException, PlayerDeadException {
         switch (action) {
             case north:
                 try {
@@ -134,7 +141,9 @@ public class Controller {
                 player.useItem("HealthPot");
                 break;
             case attack:
-                //combatController(player, player.getCurrentRoom().getMonster, ui);
+                combat = new Combat();
+                combat.combatController(player, player.getCurrentRoom().getMonster());
+                
                 break;
             case help:
                 ui.listOfCommands();

@@ -3,6 +3,7 @@ package adventureGame.logic;
 
 //Group 20
 //Lau, Mark, Jonatan og Mads
+import exceptions.PlayerDeadException;
 import adventureGame.data.Item;
 import exceptions.NoDoorException;
 import adventureGame.data.Room;
@@ -17,7 +18,7 @@ public class Player {
     private int attackPower = 1;
     private int defense = 0;
     private int damageOutput;
-    private int damageInput;
+    //private int damageInput;
 
     // Constructor
     public Player(String name, Room startRoom) {
@@ -118,24 +119,23 @@ public class Player {
         this.defense = defense;
     }
 
-    public int getDamageOutput(int damageOutput) {
-        int output;
-        int damage = getDamageInput();
+    public void loseHealth(int monsterAttackPower) throws PlayerDeadException {
+        int damage = monsterAttackPower;
         int block = getDefense();
-        if (block == 0) {
-            block = 100;
+        int output = (1 - block / 100) * damage;
+        this.health -= output;
+        if (this.health <= 0) {
+            throw new PlayerDeadException();
         }
-        output = (1 - (block / 100)) * damage;
-        return output;
     }
 
-    public int getDamageInput() {
-        return damageInput;
-    }
-
-    public void setDamageInput(int damageInput) {
-        this.damageInput = damageInput;
-    }
+//    public int getDamageInput() {
+//        return damageInput;
+//    }
+//
+//    public void setDamageInput(int damageInput) {
+//        this.damageInput = damageInput;
+//    }
 
     public Room getCurrentRoom() {
         return currentRoom;

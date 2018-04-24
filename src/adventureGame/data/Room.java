@@ -1,14 +1,11 @@
 //Contains a description of room as well as pointers to neighboor rooms.
-
 package adventureGame.data;
 
 //Group 20
-
 import adventureGame.data.monsters.Monster;
 import exceptions.NoItemException;
 
 //Lau, Mark, Jonatan og Mads
-
 public class Room {
 
     private Room north, east, south, west;
@@ -83,8 +80,7 @@ public class Room {
     public Item getItem() throws NoItemException {
         if (item != null) {
             return item;
-        }
-        else {
+        } else {
             throw new NoItemException();
         }
     }
@@ -126,6 +122,12 @@ public class Room {
         this.itemDescription = itemDescription;
     }
 
+    public void setItem(Item item) {
+        if (item != null) {
+            this.item = item;
+        }
+    }
+
     public Monster getMonster() {
         return monster;
     }
@@ -133,13 +135,11 @@ public class Room {
     public void setMonster(Monster monster) {
         this.monster = monster;
     }
-    
+
     public void removeMonster() {
         item = null;
         itemDescription = "";
     }
-    
-    
 
     //toString method adds a string for each door(if there is one) and adds with the description string feelOfRoom.
     @Override
