@@ -4,7 +4,7 @@ package adventureGame.logic;
 //Group 20
 //Lau, Mark, Jonatan og Mads
 import adventureGame.data.Item;
-import adventureGame.data.NoDoorException;
+import exceptions.NoDoorException;
 import adventureGame.data.Room;
 import java.util.ArrayList;
 
@@ -40,7 +40,7 @@ public class Player {
     //Checks if there is a door north with checkDirection(), moves to room north if there is.
     //Otherwise it throws an exception.
     public void goNorth() throws NoDoorException {
-        if (checkForDoor("north")) {
+        if (checkForDoor(ActionType.north)) {
             setCurrentRoom(getCurrentRoom().getNorth()); //set current room to the room north
         } else {
             throw new NoDoorException();
@@ -50,7 +50,7 @@ public class Player {
     //Checks if there is a door east with checkDirection(), moves to room east if there is.
     //Otherwise it throws an exception.
     public void goEast() throws NoDoorException {
-        if (checkForDoor("east")) {
+        if (checkForDoor(ActionType.east)) {
             setCurrentRoom(getCurrentRoom().getEast()); //set current room to the room east
         } else {
             throw new NoDoorException();
@@ -60,7 +60,7 @@ public class Player {
     //Checks if there is a door south with checkDirection(), moves to room south if there is.
     //Otherwise it throws an exception.
     public void goSouth() throws NoDoorException {
-        if (checkForDoor("south")) {
+        if (checkForDoor(ActionType.south)) {
             setCurrentRoom(getCurrentRoom().getSouth()); //set current room to the room south
         } else {
             throw new NoDoorException();
@@ -70,7 +70,7 @@ public class Player {
     //Checks if there is a door west with checkDirection(), moves to room west if there is.
     //Otherwise it throws an exception.
     public void goWest() throws NoDoorException {
-        if (checkForDoor("west")) {
+        if (checkForDoor(ActionType.west)) {
             setCurrentRoom(getCurrentRoom().getWest()); //set current room to the room west
         } else {
             throw new NoDoorException();
@@ -79,15 +79,15 @@ public class Player {
 
     //Determines if the chosen direction is possible. If there is no door in a
     //certain direction, its value is null.
-    private boolean checkForDoor(String direction) {
+    private boolean checkForDoor(ActionType direction) {
         switch (direction) {
-            case "north":
+            case north:
                 return getCurrentRoom().getNorth() != null;
-            case "east":
+            case east:
                 return getCurrentRoom().getEast() != null;
-            case "south":
+            case south:
                 return getCurrentRoom().getSouth() != null;
-            case "west":
+            case west:
                 return getCurrentRoom().getWest() != null;
             default:
                 return false;

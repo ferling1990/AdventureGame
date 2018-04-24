@@ -1,4 +1,4 @@
-package adventureGame.data;
+package exceptions;
 
 //Group 20
 //Lau, Mark, Jonatan og Mads

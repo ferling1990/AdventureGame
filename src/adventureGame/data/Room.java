@@ -3,6 +3,9 @@
 package adventureGame.data;
 
 //Group 20
+
+import exceptions.NoItemException;
+
 //Lau, Mark, Jonatan og Mads
 
 public class Room {

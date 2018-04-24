@@ -3,6 +3,7 @@ package adventureGame.data;
 //Group 20
 //Lau, Mark, Jonatan og Mads
 
+import exceptions.NoDoorException;
 import adventureGame.logic.Player;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

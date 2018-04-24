@@ -4,9 +4,9 @@ package adventureGame.logic;
 
 //Group 20
 //Lau, Mark, Jonatan og Mads
-import adventureGame.data.NoDoorException;
+import exceptions.NoDoorException;
 import adventureGame.data.Dungeon;
-import adventureGame.data.NoItemException;
+import exceptions.NoItemException;
 import adventureGame.view.TUI;
 
 public class Controller {
