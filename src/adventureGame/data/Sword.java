@@ -12,9 +12,8 @@ import adventureGame.logic.Player;
  * @author jonab
  */
 public class Sword extends Item {
-
-    Player player;
-    int attackPower = 50;
+    
+    private int attackPower = 50;
     private boolean equipped = false;
 
     @Override
@@ -24,6 +23,14 @@ public class Sword extends Item {
         }
         player.setAttackPower(attackPower);
         equipped = true;
+    }
+
+    public boolean isEquipped() {
+        return equipped;
+    }
+
+    public void setEquipped(boolean equipped) {
+        this.equipped = equipped;
     }
 
     @Override

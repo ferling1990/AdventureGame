@@ -12,10 +12,19 @@ import adventureGame.logic.Player;
  * @author jonab
  */
 public class Shield extends Item {
-
-    Player player;
+    
     private int defense = 20;
     private boolean equipped = false;
+
+    public boolean isEquipped() {
+        return equipped;
+    }
+
+    public void setEquipped(boolean equipped) {
+        this.equipped = equipped;
+    }
+    
+    
 
     @Override
     public void use(Player player) {
