@@ -1,26 +1,26 @@
 package adventureGame.logic;
 
+import exceptions.NoMonsterException;
 import adventureGame.data.monsters.*;
 import exceptions.MonsterDeadException;
 import exceptions.PlayerDeadException;
 
 public class Combat {
 
-    private boolean didSomeoneDie = false;
     public static final String RED = "\u001B[31m";
 
-    public void combatController(Player player, Monster monster) throws PlayerDeadException {
-        while (!didSomeoneDie) {
+    public void combatController(Player player, Monster monster) throws PlayerDeadException, NoMonsterException {
+        if(monster == null){
+            throw new NoMonsterException();
+        }
             try {
                 playerAttack(player, monster);
                 monsterAttack(player, monster);
                 combatLog(player, monster);
             } catch (MonsterDeadException ex) {
-                didSomeoneDie = true;
 //              player.getCurrentRoom().setItem(monster.getItem);
                 player.getCurrentRoom().removeMonster();
             }
-        }
     }
 
     private void playerAttack(Player player, Monster monster) throws MonsterDeadException {

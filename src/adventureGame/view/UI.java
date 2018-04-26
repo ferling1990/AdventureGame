@@ -18,7 +18,8 @@ public interface UI {
     public void noDoorMessage();
     public void noLootMessage();
     public void listOfCommands();
-    public void showPlayerHealth(Player player);
     public void printRoomDescription(Room room);
+    public void printStats(Player player);
+    public void noMonsterMessage();
     
 }

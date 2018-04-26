@@ -8,7 +8,10 @@ import exceptions.NoDoorException;
 import adventureGame.data.Dungeon;
 import exceptions.NoItemException;
 import adventureGame.view.TUI;
+import exceptions.NoMonsterException;
 import exceptions.PlayerDeadException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Controller {
 
@@ -18,12 +21,14 @@ public class Controller {
     private TUI ui;
     private int turn;
     private Combat combat;
+    private boolean hasRoomChanged;
 //    private boolean noCombat = true;
 
     public Controller() {
         ui = new TUI();
         world = new World();
         turn = 1;
+        hasRoomChanged = false;
     }
 
     public void game() {
@@ -32,7 +37,7 @@ public class Controller {
         ui.startMessage();
         //main loop that kees the game running till the end of maze is reached or player types quit.
         do {
-//            ui.showPlayerHealth(player);
+            //ui.showPlayerHealth(player);
             ui.printRoomDescription(player.getCurrentRoom());
             addExtraDescriptionToStartRoom();
 
@@ -68,11 +73,11 @@ public class Controller {
     public void action() {
         int count = 0;
         int maxTries = 3;
-        while (count++ < maxTries) {
+        while (count++ < maxTries || !hasRoomChanged) {
             String actionString = ui.askForAction();
             try {
                 ActionType actionEnum = actionConverter(actionString);
-                playerAction(actionEnum); //This is a switch that asks for player action with fitting cases.
+                hasRoomChanged = playerAction(actionEnum); //This is a switch that asks for player action with fitting cases.
                 count = maxTries;
             } catch (IllegalArgumentException e) {
                 ui.invalidCommand();
@@ -83,8 +88,11 @@ public class Controller {
             } catch (PlayerDeadException ex) {
                 ui.deathMessage();
                 System.exit(0);
+            } catch (NoMonsterException ex) {
+                ui.noMonsterMessage();
             }
         }
+        hasRoomChanged = false;
     }
 
     public ActionType actionConverter(String action) {
@@ -99,35 +107,37 @@ public class Controller {
 
 //    Method that receives the attempted action from the user
 //    and through the switch tries to do something.
-    public void playerAction(ActionType action) throws IllegalArgumentException, NoDoorException, NoItemException, PlayerDeadException {
+    public boolean playerAction(ActionType action) throws IllegalArgumentException, NoDoorException, NoItemException, PlayerDeadException, NoMonsterException {
         switch (action) {
             case north:
                 player.goNorth();
-                break;
+                return true;
             case east:
                 player.goEast();
-                break;
+                return true;
             case south:
                 player.goSouth();
-                break;
+                return true;
             case west:
                 player.goWest();
-                break;
+                return true;
             case loot:
                 player.inventory.add(player.getCurrentRoom().getItem());
                 player.getCurrentRoom().removeItem();
-                break;
+                return false;
             case pot:
                 player.useItem("HealthPot");
-                break;
+                return false;
+            case stats:
+                ui.printStats(player);
+                return false;
             case attack:
                 combat = new Combat();
                 combat.combatController(player, player.getCurrentRoom().getMonster());
-
-                break;
+                return false;
             case help:
                 ui.listOfCommands();
-                break;
+                return false;
             case quit:
                 System.out.println("GG");
                 System.exit(0);

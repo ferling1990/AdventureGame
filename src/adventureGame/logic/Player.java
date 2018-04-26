@@ -10,20 +10,23 @@ import adventureGame.data.Room;
 import java.util.ArrayList;
 
 public class Player {
-
+    private static final int START_DAMAGE = 2;
+    private static final int START_DEFENSE = 0;
+    private static final int START_HEALTH = 100;
+    
     private String name;
-    private int health;
+    private int health, attackPower, defense;
     private Room currentRoom;
     public ArrayList<Item> inventory;
-    private int attackPower = 1;
-    private int defense = 0;
 
     // Constructor
     public Player(String name, Room startRoom) {
         inventory = new ArrayList();
         this.name = name;
-        this.health = 50;
+        this.health = START_HEALTH;
         this.currentRoom = startRoom;
+        this.attackPower = START_DAMAGE;
+        this.defense = START_DEFENSE;
     }
 
     //Searches inventory for specific item, if it is there it is used.
@@ -102,7 +105,7 @@ public class Player {
     }
 
     public void setAttackPower(int attackPower) {
-        this.attackPower = attackPower;
+        this.attackPower += attackPower;
     }
 
     public int getAttackPower() {

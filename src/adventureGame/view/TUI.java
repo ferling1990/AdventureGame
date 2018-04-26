@@ -70,11 +70,6 @@ public class TUI implements UI{
     }
 
     @Override
-    public void showPlayerHealth(Player player) {
-        System.out.println("hp: " +player.getHealth());
-    }
-
-    @Override
     public void printRoomDescription(Room room) {
         System.out.println(room); //Prints the room description
     }
@@ -82,6 +77,18 @@ public class TUI implements UI{
     @Override
     public void noLootMessage() {
         System.out.println("There is nothing to loot in this room.");
+    }
+
+    @Override
+    public void printStats(Player player) {
+        System.out.println("Health: " +player.getHealth());
+        System.out.println("Attackpower: " +player.getAttackPower());
+        System.out.println("Defense: "+player.getDefense());
+    }
+
+    @Override
+    public void noMonsterMessage() {
+        System.out.println("Nothing to attack.");
     }
     
 }

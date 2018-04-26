@@ -13,7 +13,7 @@ import adventureGame.logic.Player;
  */
 public class Shield extends Item {
     
-    private int defense = 20;
+    private int defense = 15;
     private boolean equipped = false;
 
     public boolean isEquipped() {

@@ -13,7 +13,7 @@ import adventureGame.logic.Player;
  */
 public class Sword extends Item {
     
-    private int attackPower = 50;
+    private int attackPower = 15;
     private boolean equipped = false;
 
     @Override
