@@ -64,6 +64,8 @@ public class TUI implements UI{
         System.out.println("Type " +ActionType.west.toString() + " to go west");
         System.out.println("Type " +ActionType.loot.toString() + " to loot items");
         System.out.println("Type " +ActionType.pot.toString() + " to consume health potion");
+        System.out.println("Type " +ActionType.attack.toString() + " to attack monster");
+        System.out.println("Type " +ActionType.stats.toString() + " to see your stats");
         System.out.println("Type " +ActionType.quit.toString() + " to quit game");
         System.out.println("");
         // add loot, combat, etcetc
@@ -89,6 +91,11 @@ public class TUI implements UI{
     @Override
     public void noMonsterMessage() {
         System.out.println("Nothing to attack.");
+    }
+
+    @Override
+    public void youCantRun() {
+        System.out.println("You can't run away.");
     }
     
 }

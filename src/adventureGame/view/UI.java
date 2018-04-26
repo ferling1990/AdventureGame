@@ -21,5 +21,6 @@ public interface UI {
     public void printRoomDescription(Room room);
     public void printStats(Player player);
     public void noMonsterMessage();
+    public void youCantRun();
     
 }

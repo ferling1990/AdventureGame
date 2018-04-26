@@ -19,7 +19,7 @@ public class HealthPot extends Item {
         } else {
             player.setHealth(player.getHealth() + 20);
         }
-        player.inventory.remove(this);
+        player.removeItem(this);
     }
 
     // This string is important, as it is used to search for different items in

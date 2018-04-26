@@ -10,6 +10,7 @@ import exceptions.NoItemException;
 import adventureGame.view.TUI;
 import exceptions.NoMonsterException;
 import exceptions.PlayerDeadException;
+import exceptions.inCombatException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,7 +41,8 @@ public class Controller {
             //ui.showPlayerHealth(player);
             ui.printRoomDescription(player.getCurrentRoom());
             addExtraDescriptionToStartRoom();
-
+            
+            checkForCombat();
             action();
             turn++; // counts the number of turns used.
         } while (!player.getCurrentRoom().getIsFinalRoom()); //game ends when reaching the final room (the only one with getIsFinalRoom returns true)
@@ -90,6 +92,8 @@ public class Controller {
                 System.exit(0);
             } catch (NoMonsterException ex) {
                 ui.noMonsterMessage();
+            } catch (inCombatException ex) {
+                ui.youCantRun();
             }
         }
         hasRoomChanged = false;
@@ -107,7 +111,7 @@ public class Controller {
 
 //    Method that receives the attempted action from the user
 //    and through the switch tries to do something.
-    public boolean playerAction(ActionType action) throws IllegalArgumentException, NoDoorException, NoItemException, PlayerDeadException, NoMonsterException {
+    public boolean playerAction(ActionType action) throws IllegalArgumentException, NoDoorException, NoItemException, PlayerDeadException, NoMonsterException, inCombatException {
         switch (action) {
             case north:
                 player.goNorth();
@@ -122,7 +126,7 @@ public class Controller {
                 player.goWest();
                 return true;
             case loot:
-                player.inventory.add(player.getCurrentRoom().getItem());
+                player.addItem(player.getCurrentRoom().getItem());
                 player.getCurrentRoom().removeItem();
                 return false;
             case pot:
@@ -145,6 +149,14 @@ public class Controller {
                 throw new IllegalArgumentException();
         }
 
+    }
+    public void checkForCombat() {
+        if(player.getCurrentRoom().getMonster() == null) {
+            player.setInCombat(false);
+        }
+        else {
+            player.setInCombat(true);
+        }
     }
 
 }

@@ -17,7 +17,7 @@ public class MonsterBoss extends Monster {
     }
 
     private int stun() {
-        return stunPower;
+        return stunPower + ATTACK_POWER;
     }
 
     private int fireball() {
@@ -26,14 +26,14 @@ public class MonsterBoss extends Monster {
 
     @Override
     public int getAttackPower() {
-        if (cooldown_stun-- == 0) {                    //Cooldown sammenlignes med 0, derefter tælles der ned. (cooldown == 0, cooldown--)
+        if (cooldown_stun-- <= 0) {                    //Cooldown sammenlignes med 0, derefter tælles der ned. (cooldown == 0, cooldown--)
             if (((int) (Math.random() * 100)) % 2 == 0) {
                 cooldown_stun = MAX_COOLDOWN_stunPower;
                 return stun();                      //Add something to have player skip a turn, perhaps do "double" damage
 
             }
         }
-        if (cooldown_fireball-- == 0) {                    //Cooldown sammenlignes med 0, derefter tælles der ned. (cooldown == 0, cooldown--)
+        if (cooldown_fireball-- <= 0) {                    //Cooldown sammenlignes med 0, derefter tælles der ned. (cooldown == 0, cooldown--)
             if (((int) (Math.random() * 100)) % 2 == 0) {
                 cooldown_fireball = MAX_COOLDOWN_FireballPower;
                 return fireball();

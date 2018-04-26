@@ -19,7 +19,7 @@ public class MonsterImp extends Monster {
 
     @Override
     public int getAttackPower() {
-        if (cooldown_fireball-- == 0) {                    //Cooldown sammenlignes med 0, derefter tælles der ned. (cooldown == 0, cooldown--)
+        if (cooldown_fireball-- <= 0) {                    //Cooldown sammenlignes med 0, derefter tælles der ned. (cooldown == 0, cooldown--)
             if (((int) (Math.random() * 100)) % 2 == 0) {
                 cooldown_fireball = MAX_COOLDOWN_fireball;
                 return fireball();

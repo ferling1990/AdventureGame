@@ -3,6 +3,7 @@ package adventureGame.logic;
 
 //Group 20
 //Lau, Mark, Jonatan og Mads
+import exceptions.inCombatException;
 import exceptions.PlayerDeadException;
 import adventureGame.data.Item;
 import exceptions.NoDoorException;
@@ -17,7 +18,8 @@ public class Player {
     private String name;
     private int health, attackPower, defense;
     private Room currentRoom;
-    public ArrayList<Item> inventory;
+    private ArrayList<Item> inventory;
+    private boolean inCombat;
 
     // Constructor
     public Player(String name, Room startRoom) {
@@ -27,6 +29,22 @@ public class Player {
         this.currentRoom = startRoom;
         this.attackPower = START_DAMAGE;
         this.defense = START_DEFENSE;
+        this.inCombat = false;
+    }
+    
+    public void addItem(Item item) {
+        inventory.add(item);
+        if (item.toString().equals("Sword")){
+            item.use(this);
+        }
+        else if(item.toString().equals("Shield")) {
+            item.use(this);
+        }
+            
+    }
+    
+    public void removeItem(Item item) {
+        inventory.remove(item);
     }
 
     //Searches inventory for specific item, if it is there it is used.
@@ -38,10 +56,14 @@ public class Player {
             }
         }
     }
+    
 
     //Checks if there is a door north with checkDirection(), moves to room north if there is.
     //Otherwise it throws an exception.
-    public void goNorth() throws NoDoorException {
+    public void goNorth() throws NoDoorException, inCombatException {
+        if (inCombat) {
+            throw new inCombatException();
+        }
         if (checkForDoor(ActionType.north)) {
             setCurrentRoom(getCurrentRoom().getNorth()); //set current room to the room north
         } else {
@@ -51,7 +73,10 @@ public class Player {
 
     //Checks if there is a door east with checkDirection(), moves to room east if there is.
     //Otherwise it throws an exception.
-    public void goEast() throws NoDoorException {
+    public void goEast() throws NoDoorException, inCombatException {
+        if (inCombat) {
+            throw new inCombatException();
+        }
         if (checkForDoor(ActionType.east)) {
             setCurrentRoom(getCurrentRoom().getEast()); //set current room to the room east
         } else {
@@ -61,7 +86,10 @@ public class Player {
 
     //Checks if there is a door south with checkDirection(), moves to room south if there is.
     //Otherwise it throws an exception.
-    public void goSouth() throws NoDoorException {
+    public void goSouth() throws NoDoorException, inCombatException {
+        if (inCombat) {
+            throw new inCombatException();
+        }
         if (checkForDoor(ActionType.south)) {
             setCurrentRoom(getCurrentRoom().getSouth()); //set current room to the room south
         } else {
@@ -71,7 +99,10 @@ public class Player {
 
     //Checks if there is a door west with checkDirection(), moves to room west if there is.
     //Otherwise it throws an exception.
-    public void goWest() throws NoDoorException {
+    public void goWest() throws NoDoorException, inCombatException {
+        if (inCombat) {
+            throw new inCombatException();
+        }
         if (checkForDoor(ActionType.west)) {
             setCurrentRoom(getCurrentRoom().getWest()); //set current room to the room west
         } else {
@@ -96,6 +127,15 @@ public class Player {
         }
     }
 
+    public boolean isInCombat() {
+        return inCombat;
+    }
+
+    public void setInCombat(boolean inCombat) {
+        this.inCombat = inCombat;
+    }
+
+    
     public int getHealth() {
         return health;
     }
