@@ -21,42 +21,28 @@ public class Combat {
             } catch (MonsterDeadException ex) {
                 didSomeoneDie = true;
 //              player.getCurrentRoom().setItem(monster.getItem);
-             player.getCurrentRoom().removeMonster();
+                player.getCurrentRoom().removeMonster();
             }
         }
     }
 
     private void playerAttack(Player player, Monster monster) throws MonsterDeadException {
-        try {
-            if (monster.getHealth() > 0) {
-                int damage = player.getAttackPower();
-                monster.setHealth(monster.getHealth() - damage);
-            }
-        } catch (Exception MDE) {
-            throw MDE; //throw MonsterDeadException
-        }
+        int damage = player.getAttackPower();
+        monster.loseHealth(damage);
     }
 
     private void monsterAttack(Player player, Monster monster) throws PlayerDeadException {
-        try {
-            if (monster.getHealth() > 0) {
-                int damage = monster.getAttackPower();
-                player.setHealth(player.getHealth() - damage);
-            }
-            didSomeoneDie = true;
-        } catch (Exception PDE) {
-            throw PDE; //throw PlayerDeadException
-        }
-
+        int damage = monster.getAttackPower();
+        player.loseHealth(damage);
     }
 
     private void combatLog(Player player, Monster monster) {
-        System.out.println(RED +"the monster damaged you for "+ monster.getAttackPower() + RED);
+        System.out.println(RED + "the monster damaged you for " + monster.getAttackPower() + RED);
         System.out.println(RED + "your health: " + player.getHealth() + RED);
-        System.out.println(RED +"you've damaged the monster for "+ player.getAttackPower() + RED);
+        System.out.println(RED + "you've damaged the monster for " + player.getAttackPower() + RED);
         System.out.println(RED + "monster health: " + monster.getHealth() + RED);
-        if(monster.getHealth() == 0){
-            System.out.println(RED+"you've killed the monster!"+RED);
+        if (monster.getHealth() == 0) {
+            System.out.println(RED + "you've killed the monster!" + RED);
         }
 
     }

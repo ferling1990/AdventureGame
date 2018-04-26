@@ -9,8 +9,6 @@ import adventureGame.data.Dungeon;
 import exceptions.NoItemException;
 import adventureGame.view.TUI;
 import exceptions.PlayerDeadException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Controller {
 
@@ -53,23 +51,15 @@ public class Controller {
         player = new Player("Player1", dungeon.rooms.get(world.generateStartRoom())); //generateStartRoom randomizes between 4 possible startrooms
     }
 
-//    public boolean isNoCombat() {
-//        return noCombat;
-//    }
-//
-//    public void setNoCombat(boolean noCombat) {
-//        this.noCombat = noCombat;
-//    }
-
     // this if-statement adds the 3 messages to the startroom. We have 
     // decided to do it this way, as previously mentioned our startroom is "random".
     public void addExtraDescriptionToStartRoom() {
-            if (turn == 1) {
-                player.getCurrentRoom().addStringToDescription("\nUpon entering the room, you recognize it,");
-                player.getCurrentRoom().addStringToDescription("you've been here before, you recognize the elevator,");
-                player.getCurrentRoom().addStringToDescription("you are back where you started!");
-            }
-        
+        if (turn == 1) {
+            player.getCurrentRoom().addStringToDescription("\nUpon entering the room, you recognize it,");
+            player.getCurrentRoom().addStringToDescription("you've been here before, you recognize the elevator,");
+            player.getCurrentRoom().addStringToDescription("you are back where you started!");
+        }
+
     }
 
     // This method runs a loop on playerAction until a valid command is used or
@@ -112,40 +102,20 @@ public class Controller {
     public void playerAction(ActionType action) throws IllegalArgumentException, NoDoorException, NoItemException, PlayerDeadException {
         switch (action) {
             case north:
-                try {
-                    player.goNorth();
-                } catch (NoDoorException e) {
-                    throw e;
-                }
+                player.goNorth();
                 break;
             case east:
-                try {
-                    player.goEast();
-                } catch (NoDoorException e) {
-                    throw e;
-                }
+                player.goEast();
                 break;
             case south:
-                try {
-                    player.goSouth();
-                } catch (NoDoorException e) {
-                    throw e;
-                }
+                player.goSouth();
                 break;
             case west:
-                try {
-                    player.goWest();
-                } catch (NoDoorException e) {
-                    throw e;
-                }
+                player.goWest();
                 break;
             case loot:
-                try {
-                    player.inventory.add(player.getCurrentRoom().getItem());
-                    player.getCurrentRoom().removeItem();
-                } catch (NoItemException e) {
-                    throw e;
-                }
+                player.inventory.add(player.getCurrentRoom().getItem());
+                player.getCurrentRoom().removeItem();
                 break;
             case pot:
                 player.useItem("HealthPot");
@@ -162,7 +132,6 @@ public class Controller {
                 System.out.println("GG");
                 System.exit(0);
             default:
-                System.out.println("testtesttest");
                 throw new IllegalArgumentException();
         }
 
