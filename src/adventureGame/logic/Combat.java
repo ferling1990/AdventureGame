@@ -3,8 +3,6 @@ package adventureGame.logic;
 import adventureGame.data.monsters.*;
 import exceptions.MonsterDeadException;
 import exceptions.PlayerDeadException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Combat {
 

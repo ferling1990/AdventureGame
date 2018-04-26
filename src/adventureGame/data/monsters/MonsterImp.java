@@ -2,9 +2,16 @@ package adventureGame.data.monsters;
 
 public class MonsterImp extends Monster {
 
+    private static final int HEALTH = 10;
+    private static final int ATTACK_POWER = 1;
+    
     private int fireballpower = 5;
-    private int MAX_COOLDOWN = 2;
-    private int cooldown = 0;
+    private int MAX_COOLDOWN_fireball = 2;
+    private int cooldown_fireball = 0;
+
+    public MonsterImp() {
+        super(HEALTH, ATTACK_POWER);
+    }
 
     private int fireball() {
         return fireballpower;
@@ -12,15 +19,16 @@ public class MonsterImp extends Monster {
 
     @Override
     public int getAttackPower() {
-        if (cooldown-- == 0) {                    //Cooldown sammenlignes med 0, derefter tælles der ned. (cooldown == 0, cooldown--)
+        if (cooldown_fireball-- == 0) {                    //Cooldown sammenlignes med 0, derefter tælles der ned. (cooldown == 0, cooldown--)
             if (((int) (Math.random() * 100)) % 2 == 0) {
-                cooldown = MAX_COOLDOWN;
+                cooldown_fireball = MAX_COOLDOWN_fireball;
                 return fireball();
             } else {
-                return super.getAttackPower();
+                return super.getAttackPower();          //Normal attack
             }
         } else {
-            return super.getAttackPower(); 
+            return super.getAttackPower();              //Normal attack, needs a last return, because if all lelse, fails, which it shouldn't come to such a point, it does this.
+
         }
     }
 

@@ -7,7 +7,7 @@ package adventureGame.logic;
 import adventureGame.data.Dungeon;
 import adventureGame.data.HealthPot;
 import adventureGame.data.Room;
-import adventureGame.data.monsters.Monster;
+import adventureGame.data.monsters.*;
 import java.util.Random;
 
 public class World {
@@ -49,8 +49,8 @@ public class World {
         //Creating all the rooms
         String room0Description = "This room is very cold, and has a very humid feel, the room has a torch on one side of the walls.";
         Room room0 = new Room(room0Description, new HealthPot(), "There is a healthpot in the corner."); //Room 0, start
-        Monster monster1 = new Monster();
-        room0.setMonster(monster1);
+        MonsterImp imp1 = new MonsterImp();
+        room0.setMonster(imp1);
         
         String room1Description = "The room's walls are very mossy, there's crates and other furniture, it looks like an old supply depot.";
         Room room1 = new Room(room1Description); //Room 1
@@ -86,16 +86,16 @@ public class World {
         //loop, starts from room 0 and 1
         String room10Description = "This room is very humid and cold. The east door is locked with a mysterious looking\nskull hanging above the door frame, there's wind coming from beneath the door.";
         Room room10 = new Room(room10Description); //Room 10
-        Monster monster2 = new Monster();
-        room10.setMonster(monster2);
+        MonsterImp imp2 = new MonsterImp();
+        room10.setMonster(imp2);
         
         String room11Description = "This room is nothing special, there is old clothe laying around.";
         Room room11 = new Room(room11Description);
         
         String room12Description = "This room has a very humid feeling, and a torch is lit on one of the walls.";
         Room room12 = new Room(room12Description); //Room 12
-        Monster monster3 = new Monster();
-        room12.setMonster(monster3);
+        MonsterImp imp3 = new MonsterImp();
+        room12.setMonster(imp3);
                 
         String room13Description = "This room is a long corridor, there is light at the end of the tunnel!";
         Room room13 = new Room(room13Description); //Room 13
@@ -106,8 +106,8 @@ public class World {
         
         String room15Description= "This room is very dark, and there is little to no light. In the corners of the room is various disgusting looking tools,\nand an iron maiden, there are old bloodstains in the middle of the room, a torture chamber perhaps?";
         Room room15 = new Room(room15Description); //Room 15
-        Monster monster4 = new Monster();
-        room15.setMonster(monster4);
+        MonsterImp imp4 = new MonsterImp();
+        room15.setMonster(imp4);
 
         //dead-end, starts from room 9
         String room16Description = "This room has remains of an old forge, it's not working anymore.";

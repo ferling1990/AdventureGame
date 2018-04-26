@@ -10,9 +10,9 @@ public class Monster {
     private int specialAttack;
     private Item item;
     
-    public Monster() {
-        this.health = 10;
-        this.attackPower = 1;
+    public Monster(int health, int attackPower) {
+        this.health = health;
+        this.attackPower = attackPower;
     }
 
     public Item getItem() {
