@@ -17,8 +17,6 @@ public class Player {
     public ArrayList<Item> inventory;
     private int attackPower = 1;
     private int defense = 0;
-    private int damageOutput;
-    //private int damageInput;
 
     // Constructor
     public Player(String name, Room startRoom) {
@@ -128,14 +126,6 @@ public class Player {
             throw new PlayerDeadException();
         }
     }
-
-//    public int getDamageInput() {
-//        return damageInput;
-//    }
-//
-//    public void setDamageInput(int damageInput) {
-//        this.damageInput = damageInput;
-//    }
 
     public Room getCurrentRoom() {
         return currentRoom;

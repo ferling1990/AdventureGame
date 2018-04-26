@@ -7,17 +7,14 @@ import exceptions.PlayerDeadException;
 public class Combat {
 
     private boolean didSomeoneDie = false;
-    private boolean nextTurn;
     public static final String RED = "\u001B[31m";
 
     public void combatController(Player player, Monster monster) throws PlayerDeadException {
-        nextTurn = false;
-        while (!nextTurn && !didSomeoneDie) {
+        while (!didSomeoneDie) {
             try {
                 playerAttack(player, monster);
                 monsterAttack(player, monster);
                 combatLog(player, monster);
-                nextTurn = true;
             } catch (MonsterDeadException ex) {
                 didSomeoneDie = true;
 //              player.getCurrentRoom().setItem(monster.getItem);
