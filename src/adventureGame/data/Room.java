@@ -26,6 +26,7 @@ public class Room {
         item = null;
         itemDescription = "";
         monster = null;
+        monsterDescription = "";
     }
 
     //Constructor with description and item, a null value on a direction means there is no door
@@ -40,6 +41,7 @@ public class Room {
         this.itemDescription = itemDescription;
         isFinalRoom = false;
         monster = null;
+        monsterDescription = "";
     }
 
     public void setIsFinalRoom(boolean isFinalRoom) {
@@ -132,9 +134,9 @@ public class Room {
         return monster;
     }
 
-    public void setMonster(Monster monster) {
+    public void setMonster(Monster monster, String monsterDescription) {
         this.monster = monster;
-        System.out.println("There is a monster in the room");
+        this.monsterDescription = monsterDescription;
     }
 
     public void removeMonster() {
@@ -146,6 +148,8 @@ public class Room {
     @Override
     public String toString() {
         String viewOfRoom = feelOfRoom + "\n";
+        viewOfRoom += monsterDescription+ "\n";
+        viewOfRoom += itemDescription+ "\n";
         if (north != null) {
             viewOfRoom += "There is a door North. ";
         }
@@ -158,7 +162,6 @@ public class Room {
         if (west != null) {
             viewOfRoom += "There is a door West. ";
         }
-        viewOfRoom += itemDescription;
         return viewOfRoom;
     }
 
