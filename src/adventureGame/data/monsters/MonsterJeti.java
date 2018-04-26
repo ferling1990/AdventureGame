@@ -5,6 +5,7 @@ public class MonsterJeti extends Monster {
     private int stun = 6;
     private int MAX_COOLDOWN = 5;
     private int cooldown = 0;
+
     private int stun() {
         return stun;
     }

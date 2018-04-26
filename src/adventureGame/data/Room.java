@@ -134,11 +134,12 @@ public class Room {
 
     public void setMonster(Monster monster) {
         this.monster = monster;
+        System.out.println("There is a monster in the room");
     }
 
     public void removeMonster() {
-        item = null;
-        itemDescription = "";
+        monster = null;
+        monsterDescription = "";
     }
 
     //toString method adds a string for each door(if there is one) and adds with the description string feelOfRoom.

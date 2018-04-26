@@ -20,6 +20,7 @@ public class Controller {
     private TUI ui;
     private int turn;
     private Combat combat;
+//    private boolean noCombat = true;
 
     public Controller() {
         ui = new TUI();
@@ -33,7 +34,7 @@ public class Controller {
         ui.startMessage();
         //main loop that kees the game running till the end of maze is reached or player types quit.
         do {
-            ui.showPlayerHealth(player);
+//            ui.showPlayerHealth(player);
             ui.printRoomDescription(player.getCurrentRoom());
             addExtraDescriptionToStartRoom();
 
@@ -52,14 +53,23 @@ public class Controller {
         player = new Player("Player1", dungeon.rooms.get(world.generateStartRoom())); //generateStartRoom randomizes between 4 possible startrooms
     }
 
+//    public boolean isNoCombat() {
+//        return noCombat;
+//    }
+//
+//    public void setNoCombat(boolean noCombat) {
+//        this.noCombat = noCombat;
+//    }
+
     // this if-statement adds the 3 messages to the startroom. We have 
     // decided to do it this way, as previously mentioned our startroom is "random".
     public void addExtraDescriptionToStartRoom() {
-        if (turn == 1) {
-            player.getCurrentRoom().addStringToDescription("\nUpon entering the room, you recognize it,");
-            player.getCurrentRoom().addStringToDescription("you've been here before, you recognize the elevator,");
-            player.getCurrentRoom().addStringToDescription("you are back where you started!");
-        }
+            if (turn == 1) {
+                player.getCurrentRoom().addStringToDescription("\nUpon entering the room, you recognize it,");
+                player.getCurrentRoom().addStringToDescription("you've been here before, you recognize the elevator,");
+                player.getCurrentRoom().addStringToDescription("you are back where you started!");
+            }
+        
     }
 
     // This method runs a loop on playerAction until a valid command is used or
@@ -91,7 +101,7 @@ public class Controller {
         ActionType actionType;
         try {
             actionType = ActionType.valueOf(action);
-            } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             throw e;
         }
         return actionType;
@@ -143,7 +153,7 @@ public class Controller {
             case attack:
                 combat = new Combat();
                 combat.combatController(player, player.getCurrentRoom().getMonster());
-                
+
                 break;
             case help:
                 ui.listOfCommands();
@@ -155,6 +165,7 @@ public class Controller {
                 System.out.println("testtesttest");
                 throw new IllegalArgumentException();
         }
+
     }
 
 }
