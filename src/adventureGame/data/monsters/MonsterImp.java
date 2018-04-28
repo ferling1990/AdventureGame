@@ -4,13 +4,14 @@ public class MonsterImp extends Monster {
 
     private static final int HEALTH = 10;
     private static final int ATTACK_POWER = 1;
+    private static final int PLAYER_POINTS = 1;
     
     private int fireballpower = 5;
     private int MAX_COOLDOWN_fireball = 2;
     private int cooldown_fireball = 0;
 
     public MonsterImp() {
-        super(HEALTH, ATTACK_POWER);
+        super(HEALTH, ATTACK_POWER, PLAYER_POINTS);
     }
 
     private int fireball() {

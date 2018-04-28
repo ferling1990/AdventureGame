@@ -4,6 +4,7 @@ public class MonsterBoss extends Monster {
 
     private static final int HEALTH = 50;
     private static final int ATTACK_POWER = 7;
+    private static final int PLAYER_POINTS = 10;
 
     private int stunPower = 4;
     private int fireballpower = 10;
@@ -13,7 +14,7 @@ public class MonsterBoss extends Monster {
     private int cooldown_stun = 0;
 
     public MonsterBoss() {
-        super(HEALTH, ATTACK_POWER);
+        super(HEALTH, ATTACK_POWER, PLAYER_POINTS);
     }
 
     private int stun() {

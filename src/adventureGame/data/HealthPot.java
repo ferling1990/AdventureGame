@@ -9,9 +9,10 @@ import adventureGame.logic.Player;
 
 public class HealthPot extends Item {
 
-    //Max health for a player is 100, so if the players health is 80 or above 
-    // it is set to 100, otherwise +20. After consumption it removes itself from
-    // inventory list.
+    public HealthPot() {
+        super(true);
+    }
+    
     @Override
     public void use(Player player) {
         if (player.getHealth() > 80) {

@@ -10,7 +10,7 @@ import adventureGame.data.Room;
 
 public interface UI {
 
-    public String askForAction();
+    public String askForAction(String question);
     public void winningMessage();
     public void deathMessage();
     public void startMessage();
@@ -22,5 +22,6 @@ public interface UI {
     public void printStats(Player player);
     public void noMonsterMessage();
     public void youCantRun();
+    public void printHighscore(String string);
     
 }

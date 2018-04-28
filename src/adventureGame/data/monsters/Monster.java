@@ -9,12 +9,18 @@ public class Monster {
     private int attackPower;
     private int specialAttack;
     private Item item;
+    private int playerPoints;
     
-    public Monster(int health, int attackPower) {
+    public Monster(int health, int attackPower, int playerPoints) {
         this.health = health;
         this.attackPower = attackPower;
+        this.playerPoints = playerPoints;
     }
 
+    public int getPlayerPoints() {
+        return playerPoints;
+    }
+    
     public Item getItem() {
         return item;
     }

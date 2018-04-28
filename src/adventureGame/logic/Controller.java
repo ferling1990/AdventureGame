@@ -4,15 +4,10 @@ package adventureGame.logic;
 
 //Group 20
 //Lau, Mark, Jonatan og Mads
-import exceptions.NoDoorException;
-import adventureGame.data.Dungeon;
+import exceptions.*;
+import adventureGame.data.*;
 import exceptions.NoItemException;
 import adventureGame.view.TUI;
-import exceptions.NoMonsterException;
-import exceptions.PlayerDeadException;
-import exceptions.inCombatException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Controller {
 
@@ -23,7 +18,7 @@ public class Controller {
     private int turn;
     private Combat combat;
     private boolean hasRoomChanged;
-//    private boolean noCombat = true;
+    private Highscores hs;                                  //Highscore initieres
 
     public Controller() {
         ui = new TUI();
@@ -35,17 +30,20 @@ public class Controller {
     public void game() {
         createWorld();
         createPlayer();
+        loadHighscore();
         ui.startMessage();
         //main loop that kees the game running till the end of maze is reached or player types quit.
         do {
             //ui.showPlayerHealth(player);
             ui.printRoomDescription(player.getCurrentRoom());
             addExtraDescriptionToStartRoom();
-            
+
             checkForCombat();
             action();
             turn++; // counts the number of turns used.
         } while (!player.getCurrentRoom().getIsFinalRoom()); //game ends when reaching the final room (the only one with getIsFinalRoom returns true)
+        updateHighcore();
+        ui.printHighscore(hs.printHighscore());
         ui.winningMessage();
     }
 
@@ -55,7 +53,8 @@ public class Controller {
     }
 
     public void createPlayer() {
-        player = new Player("Player1", dungeon.rooms.get(world.generateStartRoom())); //generateStartRoom randomizes between 4 possible startrooms
+        String name = ui.askForAction("What is your name?");
+        player = new Player(name, dungeon.rooms.get(world.generateStartRoom())); //generateStartRoom randomizes between 4 possible startrooms
     }
 
     // this if-statement adds the 3 messages to the startroom. We have 
@@ -69,6 +68,32 @@ public class Controller {
 
     }
 
+    public void loadHighscore() {
+        Highscores hsx = null;
+        /* Serialisering benyttes til at hente highscore objekt fra fil eller oprette et nyt hvis det fejler. */
+        try {
+            hsx = (Highscores) Serialization.load("highscores.ser");
+            ui.printHighscore(hsx.printHighscore());
+        } catch (Exception e) {
+            System.out.println("Error");
+            hsx = new Highscores();
+        }
+        hs = hsx;
+    }
+
+    public void updateHighcore() {
+        Score score = new Score(player.getName(), player.getPoint());
+        hs.addScore(score);
+        hs.sortScore();
+
+        try {
+            Serialization.save(hs, "highscores.ser");
+            System.out.println("Saved");
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+    }
+
     // This method runs a loop on playerAction until a valid command is used or
     // an invalid command has been attempted 3 times. This method catches all the 
     // exceptions.
@@ -76,7 +101,7 @@ public class Controller {
         int count = 0;
         int maxTries = 3;
         while (count++ < maxTries || !hasRoomChanged) {
-            String actionString = ui.askForAction();
+            String actionString = ui.askForAction("What is your next action?");
             try {
                 ActionType actionEnum = actionConverter(actionString);
                 hasRoomChanged = playerAction(actionEnum); //This is a switch that asks for player action with fitting cases.
@@ -150,11 +175,11 @@ public class Controller {
         }
 
     }
+
     public void checkForCombat() {
-        if(player.getCurrentRoom().getMonster() == null) {
+        if (player.getCurrentRoom().getMonster() == null) {
             player.setInCombat(false);
-        }
-        else {
+        } else {
             player.setInCombat(true);
         }
     }

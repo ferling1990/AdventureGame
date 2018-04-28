@@ -11,12 +11,13 @@ import adventureGame.data.Room;
 import java.util.ArrayList;
 
 public class Player {
+
     private static final int START_DAMAGE = 2;
     private static final int START_DEFENSE = 0;
     private static final int START_HEALTH = 100;
-    
+
     private String name;
-    private int health, attackPower, defense;
+    private int health, attackPower, defense, point;
     private Room currentRoom;
     private ArrayList<Item> inventory;
     private boolean inCombat;
@@ -31,18 +32,15 @@ public class Player {
         this.defense = START_DEFENSE;
         this.inCombat = false;
     }
-    
+
     public void addItem(Item item) {
         inventory.add(item);
-        if (item.toString().equals("Sword")){
+        if (!item.isConsumable()) {
             item.use(this);
+
         }
-        else if(item.toString().equals("Shield")) {
-            item.use(this);
-        }
-            
     }
-    
+
     public void removeItem(Item item) {
         inventory.remove(item);
     }
@@ -56,7 +54,6 @@ public class Player {
             }
         }
     }
-    
 
     //Checks if there is a door north with checkDirection(), moves to room north if there is.
     //Otherwise it throws an exception.
@@ -135,7 +132,6 @@ public class Player {
         this.inCombat = inCombat;
     }
 
-    
     public int getHealth() {
         return health;
     }
@@ -150,6 +146,14 @@ public class Player {
 
     public int getAttackPower() {
         return attackPower;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+    
+    public void addPoint(int point) {
+        this.point += point;
     }
 
     public int getDefense() {

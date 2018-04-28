@@ -4,13 +4,14 @@ public class MonsterJeti extends Monster {
 
     private static final int HEALTH = 20;
     private static final int ATTACK_POWER = 5;
+    private static final int PLAYER_POINTS = 5;
 
     private int stunPower = 3;
     private int MAX_COOLDOWN_stun = 5;
     private int cooldown_stun = 0;
 
     public MonsterJeti() {
-        super(HEALTH, ATTACK_POWER);
+        super(HEALTH, ATTACK_POWER, PLAYER_POINTS);
     }
 
     private int stun() {

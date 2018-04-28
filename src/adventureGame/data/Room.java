@@ -136,7 +136,7 @@ public class Room {
 
     public void setMonster(Monster monster, String monsterDescription) {
         this.monster = monster;
-        this.monsterDescription = monsterDescription;
+        this.monsterDescription = monsterDescription ;
     }
 
     public void removeMonster() {
@@ -147,7 +147,7 @@ public class Room {
     //toString method adds a string for each door(if there is one) and adds with the description string feelOfRoom.
     @Override
     public String toString() {
-        String viewOfRoom = feelOfRoom + "\n";
+        String viewOfRoom = "\n" + feelOfRoom + "\n";
         viewOfRoom += monsterDescription+ "\n";
         viewOfRoom += itemDescription+ "\n";
         if (north != null) {

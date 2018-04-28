@@ -18,8 +18,8 @@ public class TUI implements UI{
     }
 
     @Override
-    public String askForAction() {
-        System.out.println("What is your next action?");
+    public String askForAction(String question) {
+        System.out.println(question);
         return sc.nextLine().toLowerCase();
     }
 
@@ -35,7 +35,7 @@ public class TUI implements UI{
 
     @Override
     public void startMessage() {
-        System.out.println("After waking up, you find yourself in a room with a very dim light coming from a torch");
+        System.out.println("\nAfter waking up, you find yourself in a room with a very dim light coming from a torch");
         System.out.println("on one side of the wall. You scout the room, behind you is an elevator which isn't powered.");
         System.out.println("There's a note hanging on the elevator door, it reads:");
         System.out.println("\"Welcome.  This is the skull cavern, to prove your worth to the king, you must complete this trail.");
@@ -96,6 +96,11 @@ public class TUI implements UI{
     @Override
     public void youCantRun() {
         System.out.println("You can't run away.");
+    }
+
+    @Override
+    public void printHighscore(String string) {
+        System.out.println(string);
     }
     
 }

@@ -23,6 +23,7 @@ public class Combat {
         } catch (MonsterDeadException ex) {
             combatLog(player, monster);
             player.setInCombat(false);
+            player.addPoint(monster.getPlayerPoints());
             player.getCurrentRoom().setItem(monster.getItem());
             player.getCurrentRoom().removeMonster();
         }

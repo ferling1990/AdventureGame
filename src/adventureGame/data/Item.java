@@ -8,7 +8,17 @@ import adventureGame.logic.Player;
 
 
 public abstract class Item {
-      
+    
+    private boolean consumable;
+    
+    public Item (Boolean consumable) {
+        this.consumable = consumable;
+    }
+
+    public boolean isConsumable() {
+        return consumable;
+    }
+
     public abstract void use(Player player);
     
     @Override

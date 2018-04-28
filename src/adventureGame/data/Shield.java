@@ -16,6 +16,10 @@ public class Shield extends Item {
     private int defense = 15;
     private boolean equipped = false;
 
+    public Shield() {
+        super(false);
+    }
+
     public boolean isEquipped() {
         return equipped;
     }

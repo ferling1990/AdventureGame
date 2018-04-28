@@ -72,6 +72,8 @@ public class World {
         
         String room7Description = "This room is a corridor, the southern part is covered in water, while the northern part is dry.";
         Room room7 = new Room(room7Description); //Room 7
+        MonsterJeti jeti = new MonsterJeti();
+        room7.setMonster(jeti, "There is a mad jeti in the room.");
         
         String room8Description = "This room has a torch on one of the walls, this room looks like an old entrance,\nthere's dynamite boxes, but they are all covered in water, no use.";
         Room room8 = new Room(room8Description); //Room 8
@@ -88,9 +90,11 @@ public class World {
         //loop, starts from room 0 and 1
         String room10Description = "This room is very humid and cold. The east door is locked with a mysterious looking\nskull hanging above the door frame, there's wind coming from beneath the door.";
         Room room10 = new Room(room10Description); //Room 10
-        
+                
         String room11Description = "This room is nothing special, there is old clothe laying around.";
         Room room11 = new Room(room11Description);
+        MonsterImp imp2 = new MonsterImp();
+        room11.setMonster(imp2, "There is an Imp in the room.");
         
         String room12Description = "This room has a very humid feeling, and a torch is lit on one of the walls.";
         Room room12 = new Room(room12Description); //Room 12

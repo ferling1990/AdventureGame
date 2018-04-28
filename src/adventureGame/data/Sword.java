@@ -16,6 +16,10 @@ public class Sword extends Item {
     private int attackPower = 15;
     private boolean equipped = false;
 
+    public Sword() {
+        super(false);
+    }
+
     @Override
     public void use(Player player) {
         if (equipped) {
