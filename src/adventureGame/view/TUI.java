@@ -1,18 +1,17 @@
 //TUI only scanner and system out print.
-
 package adventureGame.view;
 
 //Group 20
 //Lau, Mark, Jonatan og Mads
-
 import adventureGame.logic.Player;
 import adventureGame.data.Room;
 import adventureGame.logic.ActionType;
 import java.util.Scanner;
 
-public class TUI implements UI{
+public class TUI implements UI {
+
     private Scanner sc;
-    
+
     public TUI() {
         sc = new Scanner(System.in);
     }
@@ -42,7 +41,7 @@ public class TUI implements UI{
         System.out.println("You have to find the right door in this maze, and with that you will find your freedom.");
         System.out.println("The king has given you a compass, don't disappoint us!\"");
         System.out.println("Type 'help' to get help");
-        
+
     }
 
     @Override
@@ -54,19 +53,19 @@ public class TUI implements UI{
     public void noDoorMessage() {
         System.out.println("You tried to walk through a wall. Ouch!");
     }
-    
+
     @Override
     public void listOfCommands() {
         System.out.println("");
-        System.out.println("Type " +ActionType.north.toString() + " to go north");
-        System.out.println("Type " +ActionType.east.toString() + " to go east");
-        System.out.println("Type " +ActionType.south.toString() + " to go south");
-        System.out.println("Type " +ActionType.west.toString() + " to go west");
-        System.out.println("Type " +ActionType.loot.toString() + " to loot items");
-        System.out.println("Type " +ActionType.pot.toString() + " to consume health potion");
-        System.out.println("Type " +ActionType.attack.toString() + " to attack monster");
-        System.out.println("Type " +ActionType.stats.toString() + " to see your stats");
-        System.out.println("Type " +ActionType.quit.toString() + " to quit game");
+        System.out.println("Type " + ActionType.north.toString() + " to go north");
+        System.out.println("Type " + ActionType.east.toString() + " to go east");
+        System.out.println("Type " + ActionType.south.toString() + " to go south");
+        System.out.println("Type " + ActionType.west.toString() + " to go west");
+        System.out.println("Type " + ActionType.loot.toString() + " to loot items");
+        System.out.println("Type " + ActionType.pot.toString() + " to consume health potion");
+        System.out.println("Type " + ActionType.attack.toString() + " to attack monster");
+        System.out.println("Type " + ActionType.stats.toString() + " to see your stats");
+        System.out.println("Type " + ActionType.quit.toString() + " to quit game");
         System.out.println("");
         // add loot, combat, etcetc
     }
@@ -83,9 +82,9 @@ public class TUI implements UI{
 
     @Override
     public void printStats(Player player) {
-        System.out.println("Health: " +player.getHealth());
-        System.out.println("Attackpower: " +player.getAttackPower());
-        System.out.println("Defense: "+player.getDefense());
+        System.out.println("Health: " + player.getHealth());
+        System.out.println("Attackpower: " + player.getAttackPower());
+        System.out.println("Defense: " + player.getDefense());
     }
 
     @Override
@@ -102,5 +101,10 @@ public class TUI implements UI{
     public void printHighscore(String string) {
         System.out.println(string);
     }
-    
+
+    @Override
+    public void youLooted(String loot) {
+        System.out.println("You have looted: " + loot);
+    }
+
 }

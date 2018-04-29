@@ -33,12 +33,12 @@ public class Player {
         this.inCombat = false;
     }
 
-    public void addItem(Item item) {
+    public String addItem(Item item) {
         inventory.add(item);
         if (!item.isConsumable()) {
             item.use(this);
-
         }
+        return item.toString();
     }
 
     public void removeItem(Item item) {

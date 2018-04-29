@@ -151,8 +151,9 @@ public class Controller {
                 player.goWest();
                 return true;
             case loot:
-                player.addItem(player.getCurrentRoom().getItem());
+                String lootedMessage = player.addItem(player.getCurrentRoom().getItem());
                 player.getCurrentRoom().removeItem();
+                ui.youLooted(lootedMessage);
                 return false;
             case pot:
                 player.useItem("HealthPot");

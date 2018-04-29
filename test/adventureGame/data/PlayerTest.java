@@ -5,6 +5,7 @@ package adventureGame.data;
 
 import exceptions.NoDoorException;
 import adventureGame.logic.Player;
+import exceptions.inCombatException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -22,7 +23,7 @@ public class PlayerTest {
     }
     
     @Test
-    public void testGoNorth() throws NoDoorException {
+    public void testGoNorth() throws NoDoorException, inCombatException {
         Room start = new Room("Start");
         Room east = new Room("north");
         start.setEast(east);
@@ -32,7 +33,7 @@ public class PlayerTest {
     }
     
 @Test
-    public void testGoEast() throws NoDoorException {
+    public void testGoEast() throws NoDoorException, inCombatException {
         Room start = new Room("Start");
         Room east = new Room("east");
         start.setEast(east);
@@ -42,7 +43,7 @@ public class PlayerTest {
     }
     
     @Test
-    public void testGoSouth() throws NoDoorException {
+    public void testGoSouth() throws NoDoorException, inCombatException {
         Room start = new Room("Start");
         Room east = new Room("south");
         start.setEast(east);
@@ -52,7 +53,7 @@ public class PlayerTest {
     }
     
     @Test
-    public void testGoWest() throws NoDoorException {
+    public void testGoWest() throws NoDoorException, inCombatException {
         Room start = new Room("Start");
         Room east = new Room("west");
         start.setEast(east);
@@ -62,25 +63,25 @@ public class PlayerTest {
     }
     
     @Test (expected = NoDoorException.class)
-    public void testGoEastWhenThereIsNoNorthRoom() throws NoDoorException {
+    public void testGoEastWhenThereIsNoNorthRoom() throws NoDoorException, inCombatException {
         Player player = new Player("player1", start);
         player.goNorth();
     }
     
         @Test (expected = NoDoorException.class)
-    public void testGoEastWhenThereIsNoEastRoom() throws NoDoorException {
+    public void testGoEastWhenThereIsNoEastRoom() throws NoDoorException, inCombatException {
         Player player = new Player("player1", start);
         player.goEast();
     }
     
         @Test (expected = NoDoorException.class)
-    public void testGoEastWhenThereIsNoSouthRoom() throws NoDoorException {
+    public void testGoEastWhenThereIsNoSouthRoom() throws NoDoorException, inCombatException {
         Player player = new Player("player1", start);
         player.goSouth();
     }
     
         @Test (expected = NoDoorException.class)
-    public void testGoEastWhenThereIsNoWestRoom() throws NoDoorException {
+    public void testGoEastWhenThereIsNoWestRoom() throws NoDoorException, inCombatException {
         Player player = new Player("player1", start);
         player.goWest();
     }

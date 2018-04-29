@@ -23,5 +23,6 @@ public interface UI {
     public void noMonsterMessage();
     public void youCantRun();
     public void printHighscore(String string);
+    public void youLooted(String loot);
     
 }
