@@ -1,4 +1,9 @@
+//This class is used to write and read serializable object to a file.
+
 package adventureGame.data;
+
+//Group 20
+//Lau, Mark, Jonatan og Mads
 
 import java.io.*;
 

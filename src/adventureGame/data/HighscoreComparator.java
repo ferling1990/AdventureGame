@@ -1,10 +1,13 @@
+//This class redifines how to compare Score, used to sort highscore array.
 package adventureGame.data;
+
+//Group 20
+//Lau, Mark, Jonatan og Mads
 
 import java.util.Comparator;
 
 public class HighscoreComparator implements Comparator<Score> {
 
-    /* Beskriver hvordan compare funktion skal sammenligne score objekt. */
     @Override
     public int compare(Score score1, Score score2) {
 

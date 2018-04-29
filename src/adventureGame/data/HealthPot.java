@@ -3,6 +3,7 @@
 package adventureGame.data;
 
 //Group 20
+//Lau, Mark, Jonatan og Mads
 
 import adventureGame.logic.Player;
 
